@@ -34,22 +34,24 @@ def choix_tirettes(tirettes):
     rang = int(input("Quelles tirettes choississez vous? Tapez un chiffre de 0 à 6 puis sur la touche entrez."))
     if cote == 'h':
         cote = 0
-        bouge_tirettes(tirettes[cote])
-        
+        tirettes[cote][rang] = bouge_tirettes(tirettes[cote][rang]) #reconfig tirette select
+    elif cote == 'v':
+        cote = 1
+        tirettes[cote][rang] = bouge_tirettes(tirettes[cote][rang]) #reconfig tirette select
+    return tirettes
 
-def bouge_tirettes():
+def bouge_tirettes(tirette):
     #Fonction donnant les possibilités de "tire", bientôt
     direction = input("Dans quel sens voulez-vous tirez?")
-    pas = input("De combien de voulez vous tirez cette tirette?")
-    #à suivre
+    pas = input("De combien de fois voulez-vous tirez?")
+
+    #tirette bouge, reinitialisation
+    
+    return tirette
     pass
     
 
 tirettes = all_tirettes()
 choix_tirettes(tirettes)
     
-    
-    
-
-
 
