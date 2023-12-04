@@ -16,12 +16,15 @@ def tirette_aleatoire():
         tirettes.append(ligne)
         i+=1
     return tirettes
-     
-tirette_droite = tirette_aleatoire()
-tirette_gauche = tirette_aleatoire()
-tirette_haut = tirette_aleatoire()
-tirette_bas = tirette_aleatoire()
 
+"""
+True = Trou; False = Plat(la boule ne peut pas tomber!)
+ex: True + True = La boule tombe
+"""
 
+tirettes_droite = tirette_aleatoire()
+tirettes_gauche = tirette_aleatoire()
+tirettes_haut = tirette_aleatoire()
+tirettes_bas = tirette_aleatoire()
 
 
