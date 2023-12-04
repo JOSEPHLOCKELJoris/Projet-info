@@ -6,7 +6,7 @@ def tirette_aleatoire():
     i = 0
     while i < 7:
         ligne = []
-        for tirette in range(7):
+        for tirette in range(9):
             alea = randint(0,1)
             if alea == 0:
                 alea = False
@@ -22,9 +22,34 @@ True = Trou; False = Plat(la boule ne peut pas tomber!)
 ex: True + True = La boule tombe
 """
 
-tirettes_droite = tirette_aleatoire()
-tirettes_gauche = tirette_aleatoire()
-tirettes_haut = tirette_aleatoire()
-tirettes_bas = tirette_aleatoire()
+def all_tirettes():
+    tirettes_horizontal = tirette_aleatoire()
+    tirettes_verticale = tirette_aleatoire()
+    tirettes = [tirettes_horizontal,tirettes_verticale]
+
+def choix_tirettes(tirettes):
+    print("Il existe 2 types de tirettes: les verticales et les horizontales")
+    sens = input("Quelles type de tirettes voulez-vous bouger? Tapez 'v' ou 'h'")
+    print("Le rang se fait de haut en bas et de droite à gauche.")
+    rang = int(input("Quelles tirettes choississez vous? Tapez un chiffre de 0 à 6 puis sur la touche entrez."))
+    if cote == 'h':
+        cote = 0
+        bouge_tirettes(tirettes[cote])
+        
+
+def bouge_tirettes():
+    #Fonction donnant les possibilités de "tire", bientôt
+    direction = input("Dans quel sens voulez-vous tirez?")
+    pas = input("De combien de voulez vous tirez cette tirette?")
+    #à suivre
+    pass
+    
+
+tirettes = all_tirettes()
+choix_tirettes(tirettes)
+    
+    
+    
+
 
 
