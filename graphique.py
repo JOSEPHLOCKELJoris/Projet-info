@@ -1,12 +1,19 @@
 """ Module """
 from fltk import (image, rectangle, texte, attend_ev,
                   type_ev, cree_fenetre,abscisse,
-                  ordonnee, efface, efface_tout, rectangle)
+                  ordonnee, efface, efface_tout)
+from initialisation_et_calcul import tirettes_h, tirettes_v
 
-"""def jeu(hauteur, largeur):
-    rectangle(2* largeur // 10, 2* hauteur // 10, )"""
+LARGEUR = 700
+HAUTEUR = 500
 
-def menu(hauteur, largeur):
+
+
+def jeu(hauteur, largeur):
+    rectangle(3* hauteur // 13, 3* largeur // 13, 10*hauteur//13, 10*largeur//13)
+
+
+def menu(largeur, hauteur):
     """
     Menu principale du jeu
     """
@@ -36,8 +43,7 @@ def menu(hauteur, largeur):
             if (largeur // 3 < abscisse(evv) < 2 * largeur // 3 and
                     4 * hauteur // 10 < ordonnee(evv) < 5 * hauteur // 10):
                 efface_tout()
-                texte(largeur // 2, 2.5 * hauteur // 10, "JEU", ancrage='c', couleur="blue",
-                taille=largeur // 18, tag="menu")
+                jeu(largeur, hauteur)
             if (largeur // 3 < abscisse(evv) < 2 * largeur // 3 and
                     6 * hauteur // 10 < ordonnee(evv) < 7 * hauteur // 10):
                 efface("menu")
@@ -47,5 +53,5 @@ def menu(hauteur, largeur):
                     8 * hauteur // 10 < ordonnee(evv) < 9 * hauteur // 10):
                 break
 
-cree_fenetre(700,500)
-menu(500, 700)
+cree_fenetre(LARGEUR, HAUTEUR)
+menu(LARGEUR, HAUTEUR)

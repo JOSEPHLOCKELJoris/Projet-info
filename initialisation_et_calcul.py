@@ -41,7 +41,12 @@ def placement_aleatoire(posi_hori,posi_verti):
 def all_tirettes():
     tirettes_horizontal = tirette_aleatoire()
     tirettes_verticale = tirette_aleatoire()
+<<<<<<< HEAD
     return tirettes_horizontal,tirettes_verticale
+=======
+    tirettes = [tirettes_horizontal,tirettes_verticale]
+    return tirettes, tirettes_horizontal, tirettes_verticale
+>>>>>>> 67d2b141634272136f224dfb56de673498fe2485
 
 def possibilites(position_ex):
     if position_ex == 0:
@@ -77,10 +82,15 @@ def reinitialisation(tir_hori,tir_verti,pos_hori,pos_verti):
     pass
 
 """initialisation"""
+<<<<<<< HEAD
 tirettes_hori,tirettes_verti = all_tirettes() #[tirettes_horizontales],[tirettes_verticales]
 posi_hori,posi_verti = placement_aleatoire(tirettes_hori,tirettes_verti) #position initiale de chaque tirettes
 print(posi_hori,posi_verti)
 
+=======
+tirettes, tirettes_h, tirettes_v = all_tirettes() #[[tirettes_horizontales],[tirettes_verticales]]
+position = placement_aleatoire(tirettes) #position initiale de chaque tirettes
+>>>>>>> 67d2b141634272136f224dfb56de673498fe2485
 
 """fonction à répéter"""
 print(posi_hori, posi_verti)
