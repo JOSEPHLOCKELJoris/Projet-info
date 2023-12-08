@@ -70,7 +70,10 @@ def choix_tirettes(positions):
     return positions
 
 def reinitialisation(tirettes, position):
+<<<<<<< HEAD
     """à faire avec tableau"""
+=======
+>>>>>>> f3d82c526e3ccb9fcdc8bdc9d4c09d08713adcc7
     pass
 
 """initialisation"""
