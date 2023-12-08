@@ -1,5 +1,10 @@
 """ Fonctions Billes """
 
+
+#Futur amelioration:
+#Vérifier si la case n'est pas déjà occupée,
+#besoin du plateau
+
 def pose_billes():
     """
     Demande au joueurs de placer ces billes et stock
@@ -11,11 +16,6 @@ def pose_billes():
         bille_y = int(input("y:"))
         dico_billes[joueur + 1] = (bille_x, bille_y)
     return dico_billes
-    """
-    Futur amelioration:
-    vérifier si la case n'est pas déjà occupée,
-    besoin du plateau 
-    """
 
 joueur_1 = pose_billes()
 print(joueur_1)
