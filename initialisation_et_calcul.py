@@ -22,21 +22,26 @@ True = Trou; False = Plat(la boule ne peut pas tomber!)
 ex: True + True = La boule tombe
 """
 
-def placement_aleatoire(tout):
-    liste = []
-    for tout in tirettes:
-        position = []
-        for hori_verti in tout:
-            alea = randint(0,2)
-            position.append(alea)
-        liste.append(position)
-    return liste
+def placement_aleatoire(posi_hori,posi_verti):  
+    pos_hori = []
+    position = []
+    for tirette in posi_hori:
+        alea = randint(0,2)
+        position.append(alea)
+    pos_hori.append(position)
+    
+    pos_verti = []
+    position = []
+    for tirette in posi_verti:
+        alea = randint(0,2)
+        position.append(alea)
+    pos_verti.append(position)
+    return pos_hori, pos_verti
 
 def all_tirettes():
     tirettes_horizontal = tirette_aleatoire()
     tirettes_verticale = tirette_aleatoire()
-    tirettes = [tirettes_horizontal,tirettes_verticale]
-    return tirettes
+    return tirettes_horizontal,tirettes_verticale
 
 def possibilites(position_ex):
     if position_ex == 0:
@@ -55,30 +60,32 @@ def possibilites(position_ex):
         print("Vous pouvez uniquemennt tirez à droite. Vous tirez donc à droite. Action effectuée. ")
         return 1
     
-def choix_tirettes(positions):
+def choix_tirettes(posi_hor,posi_vert):
     print("Il existe 2 types de tirettes: les verticales et les horizontales. ")
     sens = input("Quelles type de tirettes voulez-vous bouger? Tapez 'v' ou 'h'. ")
     print("Le rang se fait de haut en bas et de droite à gauche. ")
     rang = int(input("Quelles tirettes choississez vous? Tapez un chiffre de 0 à 6 puis sur la touche entrez. "))
     if sens == 'h':
-        sens = 0
-        positions[sens][rang] = possibilites(positions[sens][rang])
+        posi_hor[0][rang] = possibilites(posi_hor[0][rang])
     elif sens == 'v':
-        sens = 1
-        print(positions)
-        positions[sens][rang] = possibilites(positions[sens][rang])
-    return positions
+        print(posi_vert)
+        posi_vert[0][rang] = possibilites(posi_vert[0][rang])
+    return posi_hor, posi_vert
 
-def reinitialisation(tirettes, position):
+def reinitialisation(tir_hori,tir_verti,pos_hori,pos_verti):
     """à faire avec tableau"""
     pass
 
 """initialisation"""
-tirettes = all_tirettes() #[[tirettes_horizontales],[tirettes_verticales]]
-position = placement_aleatoire(tirettes) #position initiale de chaque tirettes
+tirettes_hori,tirettes_verti = all_tirettes() #[tirettes_horizontales],[tirettes_verticales]
+posi_hori,posi_verti = placement_aleatoire(tirettes_hori,tirettes_verti) #position initiale de chaque tirettes
+print(posi_hori,posi_verti)
+
 
 """fonction à répéter"""
-position = choix_tirettes(position) #choix et direction de la tirette
-print(position)
-reinitialisation(tirettes, position)# réinitialisation du plateau
+print(posi_hori, posi_verti)
+posi_hori, posi_verti = choix_tirettes(posi_hori,posi_hori) #nouvelle position suite au choix et direction de la tirette par le joueur
+print(posi_hori, posi_verti)
+reinitialisation(tirettes_hori,tirettes_verti,posi_hori, posi_verti)# réinitialisation du plateau
+
 
