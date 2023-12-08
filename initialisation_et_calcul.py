@@ -36,7 +36,7 @@ def all_tirettes():
     tirettes_horizontal = tirette_aleatoire()
     tirettes_verticale = tirette_aleatoire()
     tirettes = [tirettes_horizontal,tirettes_verticale]
-    return tirettes
+    return tirettes, tirettes_horizontal, tirettes_verticale
 
 def possibilites(position_ex):
     if position_ex == 0:
@@ -74,7 +74,7 @@ def reinitialisation(tirettes, position):
     pass
 
 """initialisation"""
-tirettes = all_tirettes() #[[tirettes_horizontales],[tirettes_verticales]]
+tirettes, tirettes_h, tirettes_v = all_tirettes() #[[tirettes_horizontales],[tirettes_verticales]]
 position = placement_aleatoire(tirettes) #position initiale de chaque tirettes
 
 """fonction à répéter"""
