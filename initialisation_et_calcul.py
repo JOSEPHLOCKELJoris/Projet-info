@@ -1,3 +1,4 @@
+"""Module"""
 from random import randint
 from fltk import *
 
@@ -78,9 +79,10 @@ def reinitialisation(tir_hori,tir_verti,pos_hori,pos_verti):
     """à faire avec tableau"""
     pass
 
-"""initialisation"""
+#Initialisation
 tirettes_hori,tirettes_verti = all_tirettes() #[tirettes_horizontales],[tirettes_verticales]
-posi_hori,posi_verti = placement_aleatoire(tirettes_hori,tirettes_verti) #position initiale de chaque tirettes
+#position initiale de chaque tirettes
+posi_hori,posi_verti = placement_aleatoire(tirettes_hori,tirettes_verti)
 print(tirettes_hori)
 
 
@@ -92,22 +94,41 @@ reinitialisation(tirettes_hori,tirettes_verti,posi_hori, posi_verti)# réinitial
 """
 
 def cree_grille():
+    """Crée une grille sous forme de dictionnaire qui 
+    servira de plateau de jeu.
+
+    Returns:
+        dict: contient les données de chaque cases
+    """
     dico = {}
     for case in range(NB_CASES**2):
         dico[case] = []
     return dico
 
 
-def rempli(dico, lst, ligne, debut):
-    for elt in range(debut, len(tirettes_hori[ligne])):
-        if tirettes_hori[ligne][elt] == True:
-            dico[NB_CASES*ligne + (elt-debut)] = 1
+def rempli_hori(dico, lst, ligne, debut):
+    """Complète la ligne souhaité de la grille en horizontale
+    selon la liste contenant les tirettes
+
+    Args:
+        dico (dict): grille
+        lst (list): liste des tirettes horizontales
+        ligne (int): numéro de la ligne à modifier
+        debut (int): postion de la tirettes
+
+    Returns:
+        dict: grille modifiée
+    """
+    #for elt in range((debut-1), len(tirettes_hori[ligne-1])):
+    for elt in range((debut-1), ((debut-1)+ NB_CASES)):
+        if tirettes_hori[ligne-1][elt] == True:
+            dico[NB_CASES*(ligne-1) + (elt-(debut-1))] = 1
         else:
-            dico[NB_CASES*ligne + (elt-debut)] = 0
+            dico[NB_CASES*(ligne-1) + (elt-(debut-1))] = 0
     return dico
 
 tableau = cree_grille()
-tableau = rempli(tableau, tirettes_hori, 0, 2)
+tableau = rempli_hori(tableau, tirettes_hori, 3, 1)
 print(tableau)
 
 
