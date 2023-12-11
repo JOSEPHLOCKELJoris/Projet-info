@@ -2,7 +2,7 @@
 from fltk import (image, rectangle, texte, attend_ev,
                   type_ev, cree_fenetre,abscisse,
                   ordonnee, efface_tout)
-from initialisation_et_calcul import tirettes_h, tirettes_v
+
 
 #dimension de la fenêtre
 LARGEUR = 700

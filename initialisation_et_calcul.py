@@ -1,6 +1,8 @@
 from random import randint
 from fltk import *
 
+NB_CASES = 7 #Nombre de cases par ligne
+
 def tirette_aleatoire():
     tirettes = []
     i = 0
@@ -41,12 +43,7 @@ def placement_aleatoire(posi_hori,posi_verti):
 def all_tirettes():
     tirettes_horizontal = tirette_aleatoire()
     tirettes_verticale = tirette_aleatoire()
-<<<<<<< HEAD
     return tirettes_horizontal,tirettes_verticale
-=======
-    tirettes = [tirettes_horizontal,tirettes_verticale]
-    return tirettes, tirettes_horizontal, tirettes_verticale
->>>>>>> 67d2b141634272136f224dfb56de673498fe2485
 
 def possibilites(position_ex):
     if position_ex == 0:
@@ -82,20 +79,37 @@ def reinitialisation(tir_hori,tir_verti,pos_hori,pos_verti):
     pass
 
 """initialisation"""
-<<<<<<< HEAD
 tirettes_hori,tirettes_verti = all_tirettes() #[tirettes_horizontales],[tirettes_verticales]
 posi_hori,posi_verti = placement_aleatoire(tirettes_hori,tirettes_verti) #position initiale de chaque tirettes
-print(posi_hori,posi_verti)
+print(tirettes_hori)
 
-=======
-tirettes, tirettes_h, tirettes_v = all_tirettes() #[[tirettes_horizontales],[tirettes_verticales]]
-position = placement_aleatoire(tirettes) #position initiale de chaque tirettes
->>>>>>> 67d2b141634272136f224dfb56de673498fe2485
 
-"""fonction à répéter"""
+"""fonction à répéter
 print(posi_hori, posi_verti)
 posi_hori, posi_verti = choix_tirettes(posi_hori,posi_hori) #nouvelle position suite au choix et direction de la tirette par le joueur
 print(posi_hori, posi_verti)
 reinitialisation(tirettes_hori,tirettes_verti,posi_hori, posi_verti)# réinitialisation du plateau
+"""
+
+def cree_grille():
+    dico = {}
+    for case in range(NB_CASES**2):
+        dico[case] = []
+    return dico
+
+
+def rempli(dico, lst, ligne, debut):
+    for elt in range(debut, len(tirettes_hori[ligne])):
+        if tirettes_hori[ligne][elt] == True:
+            dico[NB_CASES*ligne + (elt-debut)] = 1
+        else:
+            dico[NB_CASES*ligne + (elt-debut)] = 0
+    return dico
+
+tableau = cree_grille()
+tableau = rempli(tableau, tirettes_hori, 0, 2)
+print(tableau)
+
+
 
 
