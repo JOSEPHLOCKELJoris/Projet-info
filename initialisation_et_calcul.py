@@ -119,7 +119,6 @@ def rempli_hori(dico, lst, ligne, debut):
     Returns:
         dict: grille modifiée
     """
-    #for elt in range((debut-1), len(tirettes_hori[ligne-1])):
     for elt in range((debut-1), ((debut-1)+ NB_CASES)):
         if tirettes_hori[ligne-1][elt] == True:
             dico[NB_CASES*(ligne-1) + (elt-(debut-1))] = 1
@@ -128,9 +127,5 @@ def rempli_hori(dico, lst, ligne, debut):
     return dico
 
 tableau = cree_grille()
-tableau = rempli_hori(tableau, tirettes_hori, 3, 1)
+tableau = rempli_hori(tableau, tirettes_hori, 7, 3)
 print(tableau)
-
-
-
-
