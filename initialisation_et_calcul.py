@@ -83,7 +83,6 @@ def reinitialisation(tir_hori,tir_verti,pos_hori,pos_verti):
 tirettes_hori,tirettes_verti = all_tirettes() #[tirettes_horizontales],[tirettes_verticales]
 #position initiale de chaque tirettes
 posi_hori,posi_verti = placement_aleatoire(tirettes_hori,tirettes_verti)
-print(tirettes_hori)
 
 
 """fonction à répéter
@@ -120,12 +119,35 @@ def rempli_hori(dico, lst, ligne, debut):
         dict: grille modifiée
     """
     for elt in range((debut-1), ((debut-1)+ NB_CASES)):
-        if tirettes_hori[ligne-1][elt] == True:
+        if lst[ligne-1][elt] == True:
             dico[NB_CASES*(ligne-1) + (elt-(debut-1))] = 1
         else:
             dico[NB_CASES*(ligne-1) + (elt-(debut-1))] = 0
     return dico
 
+def rempli_verti(dico, lst, colonne, debut):
+    """Complète la colonne souhaité de la grille en horizontale
+    selon la liste contenant les tirettes
+
+    Args:
+        dico (dict): grille
+        lst (list): liste des tirettes horizontales
+        colonne (int): numéro de la colonne à modifier
+        debut (int): postion de la tirettes
+
+    Returns:
+        dict: grille modifiée
+    """
+    for elt in range(NB_CASES):
+        if lst[colonne-1][elt + (debut-1)] == True:
+            dico[(colonne-1) + NB_CASES*elt] = 1
+        else:
+            dico[(colonne-1) + NB_CASES*elt] = 0
+    return dico
+
+
 tableau = cree_grille()
-tableau = rempli_hori(tableau, tirettes_hori, 7, 3)
+#tableau = rempli_hori(tableau, tirettes_hori, 7, 3)
+print(tirettes_verti)
+tableau = rempli_verti(tableau, tirettes_verti, 1, 1)
 print(tableau)
