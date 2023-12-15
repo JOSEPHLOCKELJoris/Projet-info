@@ -3,6 +3,10 @@ from fltk import *
 import initialisation_et_calcul
 
 
+<<<<<<< HEAD
+
+def menu(hauteur, largeur):
+=======
 #dimension de la fenêtre
 LARGEUR = 900
 HAUTEUR = 900
@@ -86,6 +90,7 @@ def regles(largeur, hauteur):
 
 
 def menu(largeur, hauteur):
+>>>>>>> cc1808f2fda396ddc8e38ea3973b65d9c18a5e3d
     """
     Menu principale du jeu
     """
@@ -124,14 +129,27 @@ def menu(largeur, hauteur):
             #dimension de la touche
             if (largeur // 3 < abscisse(evv) < 2 * largeur // 3 and
                     6 * hauteur // 10 < ordonnee(evv) < 7 * hauteur // 10):
+<<<<<<< HEAD
+                efface("menu")
+                image(largeur //2 ,hauteur //2, "img/Regle.jpg", largeur= largeur , hauteur= hauteur, ancrage='c') 
+=======
                 efface_tout()
                 regles(LARGEUR, HAUTEUR)
             #dimension de la touche
+>>>>>>> cc1808f2fda396ddc8e38ea3973b65d9c18a5e3d
             if (largeur // 3 < abscisse(evv) < 2 * largeur // 3 and
                     8 * hauteur // 10 < ordonnee(evv) < 9 * hauteur // 10):
                 break
 
+<<<<<<< HEAD
+cree_fenetre(700,500)
+menu(500, 700)
+"""image(largeur // 2, "img/Regle.jpg", largeur= largeur //2 , hauteur=  hauteur //2, ancrage='c')
+texte(largeur // 2, 2.5 * hauteur // 10, "REGLES", ancrage='c', couleur="blue",
+                      taille=largeur // 18, tag="menu")"""
+=======
 cree_fenetre(LARGEUR, HAUTEUR)
 menu(LARGEUR, HAUTEUR)
 
 #Bug quitter (prend du temps après être aller dans règles)
+>>>>>>> cc1808f2fda396ddc8e38ea3973b65d9c18a5e3d
