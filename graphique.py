@@ -135,6 +135,8 @@ def menu(largeur, hauteur):
             if (largeur // 3 < abscisse(evv) < 2 * largeur // 3 and
                     8 * hauteur // 10 < ordonnee(evv) < 9 * hauteur // 10):
                 break
+    mise_a_jour()
+    ferme_fenetre()
 
 cree_fenetre(LARGEUR,HAUTEUR)
 menu(LARGEUR, HAUTEUR)
