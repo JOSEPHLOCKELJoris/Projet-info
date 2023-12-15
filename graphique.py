@@ -16,7 +16,31 @@ def jeu(largeur, hauteur):
         hauteur (int): hauteur de la fenêtre
         largeur (int): largeur de la fenêtre
     """
-    rectangle(3* largeur // 13, 3* hauteur // 13, 10*largeur//13, 10*hauteur//13)
+    #rectangle(3*largeur//13, 3*hauteur//13, 10*largeur//13, 10*hauteur//13)
+    
+    ligne = 0
+    colonne = 0
+    nb_ligne = 7
+    nb_colonne = 7
+    
+    cote = largeur / 11
+    x = (largeur / 11)*2
+    y = (hauteur / 11)*2
+    x2 = x
+    y2 = (hauteur / 11)*3
+    print(x)
+    while ligne != nb_ligne: #passe à la ligne suivante
+        colonne = 0
+        x = (largeur / 11)*2
+        x2 = x + cote
+        while colonne != nb_colonne: #fais toute une ligne
+            rectangle(x,y,x2,y2)
+            x+= cote
+            x2 += cote
+            colonne += 1
+        ligne += 1
+        y += cote
+        y2 += cote
 
 
 def regles(largeur, hauteur):
