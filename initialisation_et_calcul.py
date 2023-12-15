@@ -84,15 +84,7 @@ tirettes_hori,tirettes_verti = all_tirettes() #[tirettes_horizontales],[tirettes
 #position initiale de chaque tirettes
 posi_hori,posi_verti = placement_aleatoire(tirettes_hori,tirettes_verti)
 
-
-"""fonction à répéter
-print(posi_hori, posi_verti)
-posi_hori, posi_verti = choix_tirettes(posi_hori,posi_hori) #nouvelle position suite au choix et direction de la tirette par le joueur
-print(posi_hori, posi_verti)
-reinitialisation(tirettes_hori,tirettes_verti,posi_hori, posi_verti)# réinitialisation du plateau
-"""
-
-def cree_grille():
+def cree_grille(nb_cases):
     """Crée une grille sous forme de dictionnaire qui 
     servira de plateau de jeu.
 
@@ -100,10 +92,9 @@ def cree_grille():
         dict: contient les données de chaque cases
     """
     dico = {}
-    for case in range(NB_CASES**2):
-        dico[case] = []
+    for case in range(nb_cases**2):
+        dico[case] = (0,0)
     return dico
-
 
 def rempli_hori(dico, lst, ligne, debut):
     """Complète la ligne souhaité de la grille en horizontale
@@ -120,9 +111,13 @@ def rempli_hori(dico, lst, ligne, debut):
     """
     for elt in range((debut-1), ((debut-1)+ NB_CASES)):
         if lst[ligne-1][elt] == True:
-            dico[NB_CASES*(ligne-1) + (elt-(debut-1))] = 1
+            val = list(dico[NB_CASES*(ligne-1) + (elt-(debut-1))])
+            val[0] = 1
+            dico[NB_CASES*(ligne-1) + (elt-(debut-1))] = tuple(val)
         else:
-            dico[NB_CASES*(ligne-1) + (elt-(debut-1))] = 0
+            val = list(dico[NB_CASES*(ligne-1) + (elt-(debut-1))])
+            val[0] = 0
+            dico[NB_CASES*(ligne-1) + (elt-(debut-1))] = tuple(val)
     return dico
 
 def rempli_verti(dico, lst, colonne, debut):
@@ -140,14 +135,19 @@ def rempli_verti(dico, lst, colonne, debut):
     """
     for elt in range(NB_CASES):
         if lst[colonne-1][elt + (debut-1)] == True:
-            dico[(colonne-1) + NB_CASES*elt] = 1
+            val = list(dico[(colonne-1) + NB_CASES*elt])
+            val[1] = 1
+            dico[(colonne-1) + NB_CASES*elt] = tuple(val)
+
         else:
-            dico[(colonne-1) + NB_CASES*elt] = 0
+            val = list(dico[(colonne-1) + NB_CASES*elt])
+            val[1] = 0
+            dico[(colonne-1) + NB_CASES*elt] = tuple(val)
     return dico
 
-
-tableau = cree_grille()
-#tableau = rempli_hori(tableau, tirettes_hori, 7, 3)
+tableau = cree_grille(NB_CASES)
+tableau = rempli_hori(tableau, tirettes_hori, 1, 1)
+tableau = rempli_verti(tableau, tirettes_verti, 7, 3)
+print(tirettes_hori)
 print(tirettes_verti)
-tableau = rempli_verti(tableau, tirettes_verti, 1, 1)
 print(tableau)
