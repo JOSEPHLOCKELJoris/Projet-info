@@ -145,9 +145,22 @@ def rempli_verti(dico, lst, colonne, debut):
             dico[(colonne-1) + NB_CASES*elt] = tuple(val)
     return dico
 
+def statut_case(tableau):
+    dico = []
+    for case in tableau:
+        if tableau[case][0] == 0 or tableau[case][1] == 0:
+            val = False
+        else:
+            val = True
+        dico.append(val)
+    print(dico)
+    return dico
+
+
 tableau = cree_grille(NB_CASES)
 tableau = rempli_hori(tableau, tirettes_hori, 1, 1)
-tableau = rempli_verti(tableau, tirettes_verti, 7, 3)
+tableau = rempli_verti(tableau, tirettes_verti, 1, 1)
 print(tirettes_hori)
 print(tirettes_verti)
 print(tableau)
+statut_case(tableau)

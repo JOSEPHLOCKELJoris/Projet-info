@@ -1,15 +1,14 @@
 """ Module """
-from fltk import (image, rectangle, texte, attend_ev,
-                  type_ev, cree_fenetre,abscisse,
-                  ordonnee, efface_tout)
+from fltk import *
+import initialisation_et_calcul
 
 
 #dimension de la fenêtre
-LARGEUR = 700
-HAUTEUR = 500
+LARGEUR = 900
+HAUTEUR = 900
 
 
-def jeu(largeur, hauteur):
+def plateau(largeur, hauteur,dico):
     """Algo du jeu.
 
     Args:
@@ -17,7 +16,7 @@ def jeu(largeur, hauteur):
         largeur (int): largeur de la fenêtre
     """
     #rectangle(3*largeur//13, 3*hauteur//13, 10*largeur//13, 10*hauteur//13)
-    
+    i = 0
     ligne = 0
     colonne = 0
     nb_ligne = 7
@@ -34,10 +33,15 @@ def jeu(largeur, hauteur):
         x = (largeur / 11)*2
         x2 = x + cote
         while colonne != nb_colonne: #fais toute une ligne
-            rectangle(x,y,x2,y2)
+            if dico[i] == True:
+                couleur = "red"
+            else:
+                couleur = "blue"
+            rectangle(x,y,x2,y2,remplissage=couleur)
             x+= cote
             x2 += cote
             colonne += 1
+            i += 1
         ligne += 1
         y += cote
         y2 += cote
@@ -116,7 +120,7 @@ def menu(largeur, hauteur):
             if (largeur // 3 < abscisse(evv) < 2 * largeur // 3 and
                     4 * hauteur // 10 < ordonnee(evv) < 5 * hauteur // 10):
                 efface_tout()
-                jeu(LARGEUR, HAUTEUR)
+                plateau(LARGEUR, HAUTEUR,dico)
             #dimension de la touche
             if (largeur // 3 < abscisse(evv) < 2 * largeur // 3 and
                     6 * hauteur // 10 < ordonnee(evv) < 7 * hauteur // 10):
