@@ -21,8 +21,8 @@ def tirette_aleatoire():
     return tirettes
 
 """
-True = Trou; False = Plat(la boule ne peut pas tomber!)
-ex: True + True = La boule tombe
+(True) or (False+True) = Plat(la boule ne peut pas tomber!)
+ex: False = La boule tombe
 """
 
 def placement_aleatoire(posi_hori,posi_verti):  
@@ -160,7 +160,5 @@ def statut_case(tableau):
 tableau = cree_grille(NB_CASES)
 tableau = rempli_hori(tableau, tirettes_hori, 1, 1)
 tableau = rempli_verti(tableau, tirettes_verti, 1, 1)
-print(tirettes_hori)
-print(tirettes_verti)
-print(tableau)
 dico=statut_case(tableau)
+print(dico)

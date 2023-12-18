@@ -46,8 +46,7 @@ def plateau(largeur, hauteur,dico):
         ligne += 1
         y += cote
         y2 += cote
-
-
+    affichage_num(largeur,hauteur)
 
 def regles(largeur, hauteur):
     """Algo des règles.
@@ -92,7 +91,7 @@ def menu(largeur, hauteur):
     Menu principale du jeu
     """
     #fond du menu
-    image(largeur // 2, hauteur // 2, "img/fond_menu.jpg", largeur=2 * largeur, hauteur=2 * hauteur,
+    image(largeur // 2, hauteur // 2, "img/Regle.jpg", largeur=2 * largeur, hauteur=2 * hauteur,
         ancrage='c')
     #dessin des touches du menu
     rectangle(largeur // 3, 4 * hauteur // 10, 2 * largeur // 3,
@@ -138,7 +137,35 @@ def menu(largeur, hauteur):
     mise_a_jour()
     ferme_fenetre()
 
+def affichage_num(largeur,hauteur):
+    """création liste numéro tirettes"""
+    num = []
+    i = 1
+    while i <= 14:
+       num.append(i)
+       i += 1
+    print(num)
+    
+    """affichage numéro vertical"""
+    i = 0
+    x = largeur/22
+    y = (hauteur/22)*5
+    while i <= 6:
+        texte(x,y, str(num[i]),couleur="red",taille=15)
+        i += 1
+        y += hauteur/11
+    
+    """affichage numéro horizontal"""
+    i = 0
+    x = (largeur/22)*5
+    y = hauteur/22
+    while i <= 6:
+        texte(x,y, str(num[i+7]),couleur="red",taille=15)
+        x += largeur/11
+        i += 1
+        
 cree_fenetre(LARGEUR,HAUTEUR)
+
 menu(LARGEUR, HAUTEUR)
 """image(largeur // 2, "img/Regle.jpg", largeur= largeur //2 , hauteur=  hauteur //2, ancrage='c')
 texte(largeur // 2, 2.5 * hauteur // 10, "REGLES", ancrage='c', couleur="blue",

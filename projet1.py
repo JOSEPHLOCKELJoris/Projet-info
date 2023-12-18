@@ -8,3 +8,5 @@ jeu = True
 while jeu:
     cree_fenetre(LARGEUR, HAUTEUR)
     menu(LARGEUR, HAUTEUR)
+    
+    
