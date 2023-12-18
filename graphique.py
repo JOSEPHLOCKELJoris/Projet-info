@@ -37,7 +37,7 @@ def plateau(largeur, hauteur,dico):
             if dico[i] == True:
                 couleur = "red"
             else:
-                couleur = "blue"
+                couleur = "black"
             rectangle(x,y,x2,y2,remplissage=couleur)
             x+= cote
             x2 += cote
@@ -167,10 +167,4 @@ def affichage_num(largeur,hauteur):
         
 cree_fenetre(LARGEUR,HAUTEUR)
 menu(LARGEUR, HAUTEUR)
-"""image(largeur // 2, "img/Regle.jpg", largeur= largeur //2 , hauteur=  hauteur //2, ancrage='c')
-texte(largeur // 2, 2.5 * hauteur // 10, "REGLES", ancrage='c', couleur="blue",
-                      taille=largeur // 18, tag="menu")"""
-
-
-#Bug quitter (prend du temps après être aller dans règles)
 
