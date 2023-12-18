@@ -55,8 +55,9 @@ def regles(largeur, hauteur):
         largeur (int): largeur de la fenêtre
         hauteur (int): hauteur de la fenêtre
     """
-    image(largeur //2 ,hauteur //2, "img/Regle.jpg", largeur= largeur ,
-          hauteur= hauteur, ancrage='c')
+    #image regles
+    image(largeur//2 ,hauteur//2, "img/Regle.jpg", largeur=largeur,
+          hauteur = hauteur, ancrage='c')
     #touche jouer
     rectangle(7*largeur // 10, 8 * hauteur // 10, 9 * largeur // 10,
               9 * hauteur // 10, remplissage="grey", tag="menu")
@@ -80,8 +81,8 @@ def regles(largeur, hauteur):
                 efface_tout()
                 jeu(LARGEUR, HAUTEUR)
             #dimension de la touche
-            if (largeur // 10 < abscisse(evv) < 2 * largeur // 3 and
-                    8 * hauteur // 10 < ordonnee(evv) < 9 * hauteur // 10):
+            if (largeur//10 < abscisse(evv) < 2*largeur//3 and
+                    8*hauteur//10 < ordonnee(evv)< 9*hauteur//10):
                 efface_tout()
                 menu(LARGEUR, HAUTEUR)
 
@@ -91,7 +92,7 @@ def menu(largeur, hauteur):
     Menu principale du jeu
     """
     #fond du menu
-    image(largeur // 2, hauteur // 2, "img/Regle.jpg", largeur=2 * largeur, hauteur=2 * hauteur,
+    image(largeur // 2, hauteur // 2, "img/fond_menu.jpg", largeur=2 * largeur, hauteur=2 * hauteur,
         ancrage='c')
     #dessin des touches du menu
     rectangle(largeur // 3, 4 * hauteur // 10, 2 * largeur // 3,
@@ -165,7 +166,6 @@ def affichage_num(largeur,hauteur):
         i += 1
         
 cree_fenetre(LARGEUR,HAUTEUR)
-
 menu(LARGEUR, HAUTEUR)
 """image(largeur // 2, "img/Regle.jpg", largeur= largeur //2 , hauteur=  hauteur //2, ancrage='c')
 texte(largeur // 2, 2.5 * hauteur // 10, "REGLES", ancrage='c', couleur="blue",
