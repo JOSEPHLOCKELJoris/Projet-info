@@ -1,7 +1,7 @@
 """ Module """
 from fltk import *
 from random import *
-from initialisation_et_calcul import dico
+from initialisation_et_calcul import val_cases
 
 
 #dimension de la fenêtre
@@ -91,7 +91,7 @@ def menu(largeur, hauteur):
     Menu principale du jeu
     """
     #fond du menu
-    image(largeur // 2, hauteur // 2, "img/Regle.jpg", largeur=2 * largeur, hauteur=2 * hauteur,
+    image(largeur // 2, hauteur // 2, "img/fond_menu.jpg", largeur=2 * largeur, hauteur=2 * hauteur,
         ancrage='c')
     #dessin des touches du menu
     rectangle(largeur // 3, 4 * hauteur // 10, 2 * largeur // 3,
@@ -122,7 +122,7 @@ def menu(largeur, hauteur):
             if (largeur // 3 < abscisse(evv) < 2 * largeur // 3 and
                     4 * hauteur // 10 < ordonnee(evv) < 5 * hauteur // 10):
                 efface_tout()
-                plateau(LARGEUR, HAUTEUR,dico)
+                plateau(LARGEUR, HAUTEUR,val_cases)
             #dimension de la touche
             if (largeur // 3 < abscisse(evv) < 2 * largeur // 3 and
                     6 * hauteur // 10 < ordonnee(evv) < 7 * hauteur // 10):

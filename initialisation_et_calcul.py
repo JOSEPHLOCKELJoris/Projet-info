@@ -5,11 +5,17 @@ from fltk import *
 NB_CASES = 7 #Nombre de cases par ligne
 
 def tirette_aleatoire():
+    """Crée une liste de 0,1  qui représente
+    une tirette 0 pour un trou , 1 pour pas de trou
+
+    Returns:
+        list: tirette
+    """
     tirettes = []
     i = 0
     while i < 7:
         ligne = []
-        for tirette in range(9):
+        for tirette in range(NB_CASES + 2):
             alea = randint(0,1)
             if alea == 0:
                 alea = False
@@ -20,31 +26,23 @@ def tirette_aleatoire():
         i+=1
     return tirettes
 
-"""
-(True) or (False+True) = Plat(la boule ne peut pas tomber!)
-ex: False = La boule tombe
-"""
-
-def placement_aleatoire(posi_hori,posi_verti):  
-    pos_hori = []
-    position = []
-    for tirette in posi_hori:
-        alea = randint(0,2)
-        position.append(alea)
-    pos_hori.append(position)
-    
-    pos_verti = []
-    position = []
-    for tirette in posi_verti:
-        alea = randint(0,2)
-        position.append(alea)
-    pos_verti.append(position)
-    return pos_hori, pos_verti
-
 def all_tirettes():
+    """Crée une liste avec:
+    - toutes les tirettes horizontales
+    - toutes les tirettes verticales
+    - toutes les tirettes
+
+    Returns:
+        list: voir précédemment
+    """
     tirettes_horizontal = tirette_aleatoire()
     tirettes_verticale = tirette_aleatoire()
-    return tirettes_horizontal,tirettes_verticale
+    tirettes_tab = []
+    for elt in tirettes_horizontal:
+        tirettes_tab.append(elt)
+    for elt in tirettes_verticale:
+        tirettes_tab.append(elt)
+    return tirettes_horizontal, tirettes_verticale, tirettes_tab
 
 def possibilites(position_ex):
     if position_ex == 0:
@@ -79,10 +77,9 @@ def reinitialisation(tir_hori,tir_verti,pos_hori,pos_verti):
     """à faire avec tableau"""
     pass
 
-#Initialisation
-tirettes_hori,tirettes_verti = all_tirettes() #[tirettes_horizontales],[tirettes_verticales]
-#position initiale de chaque tirettes
-posi_hori,posi_verti = placement_aleatoire(tirettes_hori,tirettes_verti)
+#Initialisation:
+#[tirettes_horizontales], [tirettes_verticales], [liste de toutes les tirettes]
+tirettes_hori, tirettes_verti, lst_tirettes = all_tirettes()
 
 def cree_grille(nb_cases):
     """Crée une grille sous forme de dictionnaire qui 
@@ -146,19 +143,60 @@ def rempli_verti(dico, lst, colonne, debut):
     return dico
 
 def statut_case(tableau):
-    dico = []
+    """Indique si il y a un trou sur la case
+
+    Args:
+        tableau (dict): valeurs de chaque case 
+        sous tuple (x,y) pour la tirettes horizontal et vertical
+
+    Returns:
+        val_cases: list
+    """
+    vl_case = []
     for case in tableau:
-        if tableau[case][0] == 0 or tableau[case][1] == 0:
+        if tableau[case][0] == 0 and tableau[case][1] == 0:
             val = False
         else:
             val = True
-        dico.append(val)
-    print(dico)
+        vl_case.append(val)
+    return vl_case
+
+def num_tirettes(lst):
+    """Crée dictionnaire contenant les tirettes et 
+    leurs indice de début.
+
+    Args:
+        lst (list): liste contenant toutes les tirettes
+
+    Returns:
+        dico: contient le nom, les valeurs sous liste et 
+        l'indice de chaque tirettes
+    """
+    lst_tirettes = []
+    dico = {}
+    for elt in range(NB_CASES*2):
+        debut = randint(1,3)
+        val = (lst[elt], debut)
+        dico[str(elt+1)] = val
     return dico
 
-
+#Tableau du jeu : dico avec tuple (x, y) pour hozi, verti
 tableau = cree_grille(NB_CASES)
+#Ajoute une tirrete hori
 tableau = rempli_hori(tableau, tirettes_hori, 1, 1)
+#Ajoute une tirette verti
 tableau = rempli_verti(tableau, tirettes_verti, 1, 1)
-dico=statut_case(tableau)
-print(dico)
+#Liste de True, False pour indiquer si trou 
+#ou pas pour chaque case
+val_cases=statut_case(tableau)
+#Dico de toutes les tirettes avec leurs indice de début
+dico_tirettes = num_tirettes(lst_tirettes)
+
+#Tests:
+
+#print(tirettes_hori)
+#print(tirettes_verti)
+#print(lst_tirettes)
+#print(tableau)
+#print(dico_tirettes)
+#print(val_cases)

@@ -1,4 +1,4 @@
-from initialisation_et_calcul import (tirettes, position)
+from initialisation_et_calcul import (lst_tirettes, position)
 
 """ Fonctions Billes """
 
