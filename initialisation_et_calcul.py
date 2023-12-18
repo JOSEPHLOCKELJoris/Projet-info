@@ -186,7 +186,7 @@ tableau = cree_grille(NB_CASES)
 tableau = rempli_hori(tableau, tirettes_hori, 1, 1)
 #Ajoute une tirette verti
 tableau = rempli_verti(tableau, tirettes_verti, 1, 1)
-#Liste de True, False pour indiquer si trou 
+#Liste de True, False pour indiquer si trou
 #ou pas pour chaque case
 val_cases=statut_case(tableau)
 #Dico de toutes les tirettes avec leurs indice de début
