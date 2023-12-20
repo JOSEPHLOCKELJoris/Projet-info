@@ -1,7 +1,7 @@
 from random import randint
 from fltk import *
 import initialisation_et_calcul
-import exemple
+import graphique
 
 jeu = True
 
