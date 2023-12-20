@@ -22,7 +22,10 @@ def plateau(largeur, hauteur,tab):
             orange = La bille est sur un seul plat
             Blanc = La bille est sur 2 plat
     """
-        
+    
+    image(largeur // 2, hauteur // 2, "img/fond_ecran.jpg", largeur=2 * largeur, hauteur=2 * hauteur,
+        ancrage='c')
+    
     lst_couleur=[]
     for i in range (NB_CASES**2):
         for elmt in tableau:
