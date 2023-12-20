@@ -2,7 +2,7 @@
 from fltk import *
 from random import *
 from initialisation_et_calcul import (val_cases, NB_CASES, tableau,dico_tirettes,lst_tirettes)
-
+from bille import joueur_1
 
 #dimension de la fenêtre
 LARGEUR = 800
@@ -11,7 +11,9 @@ HAUTEUR = 800
 def plateau(largeur, hauteur):
     
     image(largeur // 2, hauteur // 2, "img/fond_ecran.jpg", largeur=2 * largeur, hauteur=2 * hauteur,
-        ancrage='c')
+        ancrage='c') #affichage fond ecran
+    tirettes(largeur, hauteur) #affichage tirettes en arrière plan
+    #affichage_billes(largeur, hauteur) #affichage billes
     
     """Algo du jeu.
 
@@ -21,12 +23,61 @@ def plateau(largeur, hauteur):
     """
     #rectangle(3*largeur//13, 3*hauteur//13, 10*largeur//13, 10*hauteur//13)
 
+   
+    
+    """ Choix des couleurs des cases tirettes superposées
+            Rouge = La bille tombe
+            orange = La bille est sur un seul plat
+            Blanc = La bille est sur 2 plat
+    """
+    
+    lst_couleur=[]
+    for i in range (NB_CASES**2):
+        for elmt in tableau:
+            if tableau[elmt][0] == False and tableau[elmt][1] == False:
+                lst_couleur.append("blue")
+            elif (tableau[elmt][0] == True and tableau[elmt][1] == False) or (tableau[elmt][0] == False and tableau[elmt][1] == True):
+                lst_couleur.append("orange")
+            else:
+                lst_couleur.append("red")  
+      
+    """cases centrales"""
+    ligne = 0
+    colonne = 0
+    nb_ligne = 7
+    nb_colonne = 7
+    cote = largeur / 11
+    x = (largeur / 11)*2
+    y = (hauteur / 11)*2
+    x2 = x
+    y2 = (hauteur / 11)*3
+    i = 0
+    while ligne != nb_ligne: #passe à la ligne suivante
+        colonne = 0
+        x = (largeur / 11)*2
+        x2 = x + cote
+        while colonne != nb_colonne: #fais toute une ligne
+            rectangle(x,y,x2,y2,remplissage=lst_couleur[i])
+            x+= cote
+            x2 += cote
+            colonne += 1
+            i += 1
+        ligne += 1
+        y += cote
+        y2 += cote
+    
+    affichage_billes(largeur, hauteur) #affichage billes
+    rectangle((largeur/11)*2,(hauteur/11)*2,(largeur / 11)*9,(hauteur/11)*9,epaisseur=4) #cadre du jeu
+
+def tirettes(largeur, hauteur):
+    """Affichage des tirettes en arrière plan"""
+    
     """ Choix des couleurs des cases par tirettes
             Bleu = un plat
             Rouge = un trou
     """
     
-    list_couleur=[]
+    list_couleur = []
     for tir in dico_tirettes:
         for elmt in dico_tirettes[str(tir)][0]:
             if elmt == False:
@@ -85,41 +136,28 @@ def plateau(largeur, hauteur):
         ligne += 1
         y += cote
         y2 += cote
-      
-    
-    """ Choix des couleurs des cases tirettes superposées
-            Rouge = La bille tombe
-            orange = La bille est sur un seul plat
-            Blanc = La bille est sur 2 plat
-    """
-    
-    lst_couleur=[]
-    for i in range (NB_CASES**2):
-        for elmt in tableau:
-            if tableau[elmt][0] == False and tableau[elmt][1] == False:
-                lst_couleur.append("blue")
-            elif (tableau[elmt][0] == True and tableau[elmt][1] == False) or (tableau[elmt][0] == False and tableau[elmt][1] == True):
-                lst_couleur.append("orange")
-            else:
-                lst_couleur.append("red")  
-      
-    """cases centrales"""
+
+def affichage_billes(largeur, hauteur):
+    """Affcihe les billes"""
     ligne = 0
     colonne = 0
     nb_ligne = 7
     nb_colonne = 7
-    cote = largeur / 11
-    x = (largeur / 11)*2
-    y = (hauteur / 11)*2
+    cote = largeur/22*2
+    x = (largeur/22)*5
+    y = (hauteur/22)*5
     x2 = x
-    y2 = (hauteur / 11)*3
+    y2 = (hauteur/22)*3
     i = 0
     while ligne != nb_ligne: #passe à la ligne suivante
         colonne = 0
-        x = (largeur / 11)*2
+        x = (largeur/22)*5
         x2 = x + cote
         while colonne != nb_colonne: #fais toute une ligne
-            rectangle(x,y,x2,y2,remplissage=lst_couleur[i])
+            for bille in joueur_1:
+                if (joueur_1[bille][0]-1) == colonne: #comparaison abscisse
+                    if (joueur_1[bille][1]-1)== ligne: #comparaison ordonnee
+                        cercle(x,y,cote/2,couleur="black",remplissage="black") #bille tracé    
             x+= cote
             x2 += cote
             colonne += 1
@@ -127,15 +165,6 @@ def plateau(largeur, hauteur):
         ligne += 1
         y += cote
         y2 += cote
-    
-    #cadre du jeu
-    rectangle((largeur/11)*2,(hauteur/11)*2,(largeur / 11)*9,(hauteur/11)*9,epaisseur=4)
-
-def tirettes(dico_tirettes):
-    print(lst_tirettes,dico_tirettes)
-    for elem in dico_tirettes:
-        print(dico_tirettes[elem][1])
-        pass
     pass
 
 
@@ -254,6 +283,7 @@ def affichage_num(largeur,hauteur):
         texte(x,y, str(num[i+7]),couleur="red",taille=15)
         x += largeur/11
         i += 1
+    
 
 #tirettes(dico_tirettes)
 cree_fenetre(LARGEUR,HAUTEUR)
