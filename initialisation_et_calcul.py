@@ -69,7 +69,6 @@ def choix_tirettes(posi_hor,posi_vert):
     if sens == 'h':
         posi_hor[0][rang] = possibilites(posi_hor[0][rang])
     elif sens == 'v':
-        print(posi_vert)
         posi_vert[0][rang] = possibilites(posi_vert[0][rang])
     return posi_hor, posi_vert
 
