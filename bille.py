@@ -19,6 +19,7 @@ def pose_billes():
     return dico_billes
 
 joueur_1 = pose_billes()
+coul_j1 = "yellow"
 #joueur_2 = pose_billes()
 #joueur_1 = {1: (1, 1), 2: (2, 2), 3: (3, 3), 4: (4, 4), 5: (5, 5)}
 print(joueur_1)

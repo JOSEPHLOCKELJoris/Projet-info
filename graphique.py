@@ -2,7 +2,7 @@
 from fltk import *
 from random import *
 from initialisation_et_calcul import (val_cases, NB_CASES, tableau,dico_tirettes,lst_tirettes)
-from bille import joueur_1
+from bille import (joueur_1,coul_j1)
 
 #dimension de la fenêtre
 LARGEUR = 800
@@ -66,7 +66,7 @@ def plateau(largeur, hauteur):
         y += cote
         y2 += cote
     
-    affichage_billes(largeur, hauteur) #affichage billes
+    affichage_billes(largeur, hauteur,coul_j1) #affichage billes
     rectangle((largeur/11)*2,(hauteur/11)*2,(largeur / 11)*9,(hauteur/11)*9,epaisseur=4) #cadre du jeu
 
 def tirettes(largeur, hauteur):
@@ -137,7 +137,7 @@ def tirettes(largeur, hauteur):
         y += cote
         y2 += cote
 
-def affichage_billes(largeur, hauteur):
+def affichage_billes(largeur, hauteur,couleur):
     """Affcihe les billes"""
     ligne = 0
     colonne = 0
@@ -157,7 +157,7 @@ def affichage_billes(largeur, hauteur):
             for bille in joueur_1:
                 if (joueur_1[bille][0]-1) == colonne: #comparaison abscisse
                     if (joueur_1[bille][1]-1)== ligne: #comparaison ordonnee
-                        cercle(x,y,cote/2,couleur="black",remplissage="black") #bille tracé    
+                        cercle(x,y,cote/2,couleur=coul_j1,remplissage=coul_j1) #bille tracé    
             x+= cote
             x2 += cote
             colonne += 1
