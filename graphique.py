@@ -1,14 +1,14 @@
 """ Module """
 from fltk import *
 from random import *
-from initialisation_et_calcul import val_cases
+from initialisation_et_calcul import (val_cases, NB_CASES, tableau)
 
 
 #dimension de la fenêtre
 LARGEUR = 800
 HAUTEUR = 800
 
-def plateau(largeur, hauteur,dico):
+def plateau(largeur, hauteur,tab):
     """Algo du jeu.
 
     Args:
@@ -17,28 +17,39 @@ def plateau(largeur, hauteur,dico):
     """
     #rectangle(3*largeur//13, 3*hauteur//13, 10*largeur//13, 10*hauteur//13)
 
-    i = 0
+    """ Choix des couleurs des cases
+            Rouge = La bille tombe
+            orange = La bille est sur un seul plat
+            Blanc = La bille est sur 2 plat
+    """
+        
+    lst_couleur=[]
+    for i in range (NB_CASES**2):
+        for elmt in tableau:
+            if tableau[elmt][0] == False and tableau[elmt][1] == False:
+                lst_couleur.append("blue")
+            elif (tableau[elmt][0] == True and tableau[elmt][1] == False) or (tableau[elmt][0] == False and tableau[elmt][1] == True):
+                lst_couleur.append("orange")
+            else:
+                lst_couleur.append("red")
+           
     ligne = 0
     colonne = 0
     nb_ligne = 7
     nb_colonne = 7
-    
     cote = largeur / 11
     x = (largeur / 11)*2
     y = (hauteur / 11)*2
     x2 = x
     y2 = (hauteur / 11)*3
-    print(x)
+    i = 0
+    b = 0
     while ligne != nb_ligne: #passe à la ligne suivante
         colonne = 0
         x = (largeur / 11)*2
         x2 = x + cote
         while colonne != nb_colonne: #fais toute une ligne
-            if dico[i] == True:
-                couleur = "red"
-            else:
-                couleur = "black"
-            rectangle(x,y,x2,y2,remplissage=couleur)
+            rectangle(x,y,x2,y2,remplissage=lst_couleur[i])
             x+= cote
             x2 += cote
             colonne += 1
@@ -145,7 +156,6 @@ def affichage_num(largeur,hauteur):
     while i <= 14:
        num.append(i)
        i += 1
-    print(num)
     
     """affichage numéro vertical"""
     i = 0
