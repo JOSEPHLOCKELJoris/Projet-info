@@ -289,7 +289,19 @@ def affichage_num(largeur,hauteur):
         texte(x,y, str(num[i+7]),couleur="red",taille=15)
         x += largeur/11
         i += 1
-    
+
+def action(dico, lst):
+    num_tir = int(input("Numéro de tirettes: "))
+    direction = input("Pousser(d) ou Tirer(g): ")
+    if num_tir > NB_CASES*2:
+        num_tir = int(input("Tirttes introuvable: "))
+    if dico_tirettes != "d" or "g":
+        dico_tirettes = input("Mauvaise syntaxe: ")
+    if num_tir > NB_CASES:
+        dico = rempli_verti(dico, tirettes_verti, num_tir, lst[num_tir][1])
+    else:
+        dico = rempli_hori(dico, tirettes_hori, num_tir, lst[num_tir][1])
+    return dico
 
 #tirettes(dico_tirettes)
 cree_fenetre(LARGEUR,HAUTEUR)
