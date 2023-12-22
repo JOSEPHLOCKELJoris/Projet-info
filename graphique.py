@@ -1,7 +1,8 @@
 """ Module """
 from fltk import *
 from random import *
-from initialisation_et_calcul import (val_cases, NB_CASES, tableau,dico_tirettes,lst_tirettes)
+from initialisation_et_calcul import (val_cases, NB_CASES, tableau,dico_tirettes,lst_tirettes,
+                                      rempli_verti,rempli_hori,tirettes_verti,tirettes_hori)
 from bille import *
 
 #dimension de la fenêtre
@@ -9,11 +10,10 @@ LARGEUR = 800
 HAUTEUR = 800
 
 def plateau(largeur, hauteur):
-    
+    efface_tout()
     image(largeur // 2, hauteur // 2, "img/fond_ecran.jpg", largeur=2 * largeur, hauteur=2 * hauteur,
         ancrage='c') #affichage fond ecran
     tirettes(largeur, hauteur) #affichage tirettes en arrière plan
-    #affichage_billes(largeur, hauteur) #affichage billes
     
     """Algo du jeu.
 
@@ -31,7 +31,6 @@ def plateau(largeur, hauteur):
             Blanc = La bille est sur 2 plat
     """
     
-    #print(tableau)
     lst_couleur=[]
     for i in range (NB_CASES**2):
         for elmt in tableau:
@@ -66,9 +65,9 @@ def plateau(largeur, hauteur):
         ligne += 1
         y += cote
         y2 += cote
-    
-    affichage_billes(largeur, hauteur,coul_j1) #affichage billes
     rectangle((largeur/11)*2,(hauteur/11)*2,(largeur / 11)*9,(hauteur/11)*9,epaisseur=4) #cadre du jeu
+    mise_a_jour()
+    return tableau
 
 def tirettes(largeur, hauteur):
     """Affichage des tirettes et de leurs couleurs"""
@@ -171,7 +170,7 @@ def affichage_billes(largeur, hauteur,couleur):
         ligne += 1
         y += cote
         y2 += cote
-    pass
+    return joueur_1
 
 
 def regles(largeur, hauteur):
@@ -184,11 +183,6 @@ def regles(largeur, hauteur):
     #image regles
     image(largeur//2 ,hauteur//2, "img/Regle.jpg", largeur=largeur,
           hauteur = hauteur, ancrage='c')
-    #touche jouer
-    rectangle(7*largeur // 10, 8 * hauteur // 10, 9 * largeur // 10,
-              9 * hauteur // 10, remplissage="grey", tag="menu")
-    texte(8*largeur // 10, 8.5 * hauteur // 10, "JOUER", ancrage='c',
-          couleur="white", taille=largeur // 40, tag="menu")
     #touche quitter
     rectangle(largeur // 10, 8 * hauteur // 10, 3 * largeur // 10,
               9 * hauteur // 10, remplissage="grey", tag="menu")
@@ -201,12 +195,7 @@ def regles(largeur, hauteur):
         if tev == 'Quitte':
             break
         if tev == "ClicGauche":
-            #dimension de la touche
-            if (7*largeur // 10 < abscisse(evv) < 3 * largeur // 10 and
-                    8 * hauteur // 10 < ordonnee(evv) < 9 * hauteur // 10):
-                efface_tout()
-                jeu(LARGEUR, HAUTEUR)
-            #dimension de la touche
+            #Retour menu
             if (largeur//10 < abscisse(evv) < 2*largeur//3 and
                     8*hauteur//10 < ordonnee(evv)< 9*hauteur//10):
                 efface_tout()
@@ -236,7 +225,11 @@ def menu(largeur, hauteur):
           couleur="white", taille=largeur // 40, tag="menu")
     texte(largeur // 2, 8.5 * hauteur // 10, "QUITTER", ancrage='c',
           couleur="white", taille=largeur // 40, tag="menu")
+    boucle_menu(largeur,hauteur)
+    print("y")
+    return tableau
 
+def boucle_menu(largeur,hauteur):
     #boucle du menu
     while True:
         evv = attend_ev()
@@ -245,22 +238,24 @@ def menu(largeur, hauteur):
         if tev == 'Quitte':
             break
         if tev == "ClicGauche":
-            #dimension de la touche
+            #touche JOUER
             if (largeur // 3 < abscisse(evv) < 2 * largeur // 3 and
                     4 * hauteur // 10 < ordonnee(evv) < 5 * hauteur // 10):
+                print("x")
                 efface_tout()
-                plateau(LARGEUR, HAUTEUR)
-            #dimension de la touche
-            if (largeur // 3 < abscisse(evv) < 2 * largeur // 3 and
+                return tableau
+            #touche REGLES
+            elif (largeur // 3 < abscisse(evv) < 2 * largeur // 3 and
                     6 * hauteur // 10 < ordonnee(evv) < 7 * hauteur // 10):
                 efface("menu")
                 image(largeur //2 ,hauteur //2, "img/Regle.jpg", largeur= largeur , hauteur= hauteur, ancrage='c') 
                 efface_tout()
                 regles(LARGEUR, HAUTEUR)
-            #dimension de la touche
-            if (largeur // 3 < abscisse(evv) < 2 * largeur // 3 and
+            #touche QUITTER
+            elif (largeur // 3 < abscisse(evv) < 2 * largeur // 3 and
                     8 * hauteur // 10 < ordonnee(evv) < 9 * hauteur // 10):
                 break
+            
     mise_a_jour()
     ferme_fenetre()
 
@@ -294,7 +289,7 @@ def action(dico, lst):
     num_tir = int(input("Numéro de tirettes: "))
     direction = input("Pousser(d) ou Tirer(g): ")
     if num_tir > NB_CASES*2:
-        num_tir = int(input("Tirttes introuvable: "))
+        num_tir = int(input("Tirettes introuvable: "))
     if dico_tirettes != "d" or "g":
         dico_tirettes = input("Mauvaise syntaxe: ")
     if num_tir > NB_CASES:
@@ -303,6 +298,3 @@ def action(dico, lst):
         dico = rempli_hori(dico, tirettes_hori, num_tir, lst[num_tir][1])
     return dico
 
-#tirettes(dico_tirettes)
-cree_fenetre(LARGEUR,HAUTEUR)
-menu(LARGEUR, HAUTEUR)

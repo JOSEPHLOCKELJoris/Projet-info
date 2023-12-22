@@ -28,6 +28,9 @@ def pose_billes():
     return dico_billes
 
 
+def choix_bille():
+    pass
+
 #joueur_1 = pose_billes()
 coul_j1 = "pink"
 #joueur_2 = pose_billes()
