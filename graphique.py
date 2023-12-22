@@ -2,7 +2,7 @@
 from fltk import *
 from random import *
 from initialisation_et_calcul import (val_cases, NB_CASES, tableau,dico_tirettes,lst_tirettes)
-from bille import (joueur_1,coul_j1)
+from bille import *
 
 #dimension de la fenêtre
 LARGEUR = 800
@@ -31,15 +31,18 @@ def plateau(largeur, hauteur):
             Blanc = La bille est sur 2 plat
     """
     
+    print(tableau)
     lst_couleur=[]
     for i in range (NB_CASES**2):
         for elmt in tableau:
-            if tableau[elmt][0] == False and tableau[elmt][1] == False:
-                lst_couleur.append("blue")
-            elif (tableau[elmt][0] == True and tableau[elmt][1] == False) or (tableau[elmt][0] == False and tableau[elmt][1] == True):
-                lst_couleur.append("orange")
-            else:
-                lst_couleur.append("red")  
+            if tableau[elmt][0] == False and tableau[elmt][1] == False: #plat (vert)
+                lst_couleur.append("green")
+            elif (tableau[elmt][0] == False and tableau[elmt][1] == True):#plat tirette hori (jaune)
+                lst_couleur.append("yellow")
+            elif (tableau[elmt][0] == True and tableau[elmt][1] == False):#plat tirette verti (bleu)
+                lst_couleur.append("blue")    
+            else: #trou (gris)
+                lst_couleur.append("grey")  
       
     """cases centrales"""
     ligne = 0
@@ -70,20 +73,17 @@ def plateau(largeur, hauteur):
     rectangle((largeur/11)*2,(hauteur/11)*2,(largeur / 11)*9,(hauteur/11)*9,epaisseur=4) #cadre du jeu
 
 def tirettes(largeur, hauteur):
-    """Affichage des tirettes en arrière plan"""
+    """Affichage des tirettes et de leurs couleurs"""
     
-    """ Choix des couleurs des cases par tirettes
-            Bleu = un plat
-            Rouge = un trou
-    """
     
+    """couleur tirette vericales"""
     list_couleur = []
     for tir in dico_tirettes:
-        for elmt in dico_tirettes[str(tir)][0]:
+        for elmt in dico_tirettes[tir][0]:
             if elmt == False:
-                list_couleur.append("blue")
+                list_couleur.append("yellow")
             else:
-                list_couleur.append("red")
+                list_couleur.append("grey")
     
     
     """tirettes horizontales"""
@@ -102,7 +102,7 @@ def tirettes(largeur, hauteur):
         x = 0
         x2 = x + cote
         while colonne != nb_colonne: #fais toute une ligne
-            rectangle(x+((dico_tirettes[str(ligne+1)][1])-1)*cote,y,x2+((dico_tirettes[str(ligne+1)][1])-1)*cote,y2,remplissage=list_couleur[i])
+            rectangle(x+((dico_tirettes[ligne+1][1])-1)*cote,y,x2+((dico_tirettes[ligne+1][1])-1)*cote,y2,remplissage=list_couleur[i])
             x+= cote
             x2 += cote
             colonne += 1
@@ -111,7 +111,15 @@ def tirettes(largeur, hauteur):
         y += cote
         y2 += cote
 
-    
+    """couleur tirette vericales"""
+    list_couleur = []
+    for tir in dico_tirettes:
+        for elmt in dico_tirettes[tir][0]:
+            if elmt == False:
+                list_couleur.append("blue")
+            else:
+                list_couleur.append("grey")
+                
     """tirettes verticales"""
     ligne = 0
     colonne = 0
@@ -128,7 +136,7 @@ def tirettes(largeur, hauteur):
         x = 0
         x2 = x + cote
         while colonne != nb_colonne: #fais toute une ligne
-            rectangle(y,x+((dico_tirettes[str(ligne+8)][1])-1)*cote,y2,x2+((dico_tirettes[str(ligne+8)][1])-1)*cote,remplissage=list_couleur[i+63])
+            rectangle(y,x+((dico_tirettes[ligne+8][1])-1)*cote,y2,x2+((dico_tirettes[ligne+8][1])-1)*cote,remplissage=list_couleur[i+63])
             x+= cote
             x2 += cote
             colonne += 1
@@ -263,8 +271,8 @@ def affichage_num(largeur,hauteur):
     num = []
     i = 1
     while i <= 14:
-       num.append(i)
-       i += 1
+        num.append(i)
+        i += 1
     
     """affichage numéro vertical"""
     i = 0
@@ -288,4 +296,3 @@ def affichage_num(largeur,hauteur):
 #tirettes(dico_tirettes)
 cree_fenetre(LARGEUR,HAUTEUR)
 menu(LARGEUR, HAUTEUR)
-
