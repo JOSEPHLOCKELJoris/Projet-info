@@ -176,26 +176,36 @@ def num_tirettes(lst):
     for elt in range(NB_CASES*2):
         debut = randint(1,3)
         val = (lst[elt], debut)
-        dico[str(elt+1)] = val
+        dico[int(elt+1)] = val
     return dico
+
+def rempli_tab(dico, lst):
+    for elt in range(1, NB_CASES+1):
+        num_hori = elt
+        num_verti = elt+7
+        dico = rempli_hori(dico, tirettes_hori, elt, lst[num_hori][1])
+        dico = rempli_verti(dico, tirettes_verti, elt, lst[num_verti][1])
+    return dico
+
 
 #Tableau du jeu : dico avec tuple (x, y) pour hozi, verti
 tableau = cree_grille(NB_CASES)
-#Ajoute une tirrete hori
-tableau = rempli_hori(tableau, tirettes_hori, 1, 1)
-#Ajoute une tirette verti
-tableau = rempli_verti(tableau, tirettes_verti, 1, 1)
+
 #Liste de True, False pour indiquer si trou
 #ou pas pour chaque case
 val_cases=statut_case(tableau)
+
 #Dico de toutes les tirettes avec leurs indice de début
 dico_tirettes = num_tirettes(lst_tirettes)
+
+#Rempli le tableau de tirettes
+tableau = rempli_tab(tableau, dico_tirettes)
 
 #Tests:
 
 #print(tirettes_hori)
 #print(tirettes_verti)
 #print(lst_tirettes)
-#print(tableau)
+print(tableau)
 #print(dico_tirettes)
 #print(val_cases)
