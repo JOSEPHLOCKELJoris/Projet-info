@@ -31,18 +31,16 @@ def plateau(largeur, hauteur):
             Blanc = La bille est sur 2 plat
     """
     
-    print(tableau)
+    #print(tableau)
     lst_couleur=[]
     for i in range (NB_CASES**2):
         for elmt in tableau:
-            if tableau[elmt][0] == False and tableau[elmt][1] == False: #plat (vert)
+            if (tableau[elmt][0] == False) or ((tableau[elmt][0] == False) and tableau[elmt][1] == False): #plat hori ou (plat hori sur plat verti)
                 lst_couleur.append("green")
-            elif (tableau[elmt][0] == False and tableau[elmt][1] == True):#plat tirette hori (jaune)
-                lst_couleur.append("yellow")
-            elif (tableau[elmt][0] == True and tableau[elmt][1] == False):#plat tirette verti (bleu)
-                lst_couleur.append("blue")    
-            else: #trou (gris)
-                lst_couleur.append("grey")  
+            elif (tableau[elmt][1] == False) and (tableau[elmt][0] == True):#plat verti et pas plat hori
+                lst_couleur.append("blue")   
+            else: #trou (white)
+                lst_couleur.append(None)  
       
     """cases centrales"""
     ligne = 0
@@ -74,42 +72,6 @@ def plateau(largeur, hauteur):
 
 def tirettes(largeur, hauteur):
     """Affichage des tirettes et de leurs couleurs"""
-    
-    
-    """couleur tirette vericales"""
-    list_couleur = []
-    for tir in dico_tirettes:
-        for elmt in dico_tirettes[tir][0]:
-            if elmt == False:
-                list_couleur.append("yellow")
-            else:
-                list_couleur.append("grey")
-    
-    
-    """tirettes horizontales"""
-    ligne = 0
-    colonne = 0
-    nb_ligne = 7
-    nb_colonne = 9
-    cote = largeur / 11
-    x = 0
-    y = (hauteur / 11)*2
-    x2 = largeur / 11
-    y2 = (hauteur / 11)*3
-    i = 0
-    while ligne != nb_ligne: #passe à la ligne suivante
-        colonne = 0
-        x = 0
-        x2 = x + cote
-        while colonne != nb_colonne: #fais toute une ligne
-            rectangle(x+((dico_tirettes[ligne+1][1])-1)*cote,y,x2+((dico_tirettes[ligne+1][1])-1)*cote,y2,remplissage=list_couleur[i])
-            x+= cote
-            x2 += cote
-            colonne += 1
-            i += 1
-        ligne += 1
-        y += cote
-        y2 += cote
 
     """couleur tirette vericales"""
     list_couleur = []
@@ -118,7 +80,7 @@ def tirettes(largeur, hauteur):
             if elmt == False:
                 list_couleur.append("blue")
             else:
-                list_couleur.append("grey")
+                list_couleur.append(None)
                 
     """tirettes verticales"""
     ligne = 0
@@ -145,6 +107,42 @@ def tirettes(largeur, hauteur):
         y += cote
         y2 += cote
 
+    
+    """couleur tirette horizontales"""
+    list_couleur = []
+    for tir in dico_tirettes:
+        for elmt in dico_tirettes[tir][0]:
+            if elmt == False:
+                list_couleur.append("green")
+            else:
+                list_couleur.append(None)
+    
+    
+    """tirettes horizontales"""
+    ligne = 0
+    colonne = 0
+    nb_ligne = 7
+    nb_colonne = 9
+    cote = largeur / 11
+    x = 0
+    y = (hauteur / 11)*2
+    x2 = largeur / 11
+    y2 = (hauteur / 11)*3
+    i = 0
+    while ligne != nb_ligne: #passe à la ligne suivante
+        colonne = 0
+        x = 0
+        x2 = x + cote
+        while colonne != nb_colonne: #fais toute une ligne
+            rectangle(x+((dico_tirettes[ligne+1][1])-1)*cote,y,x2+((dico_tirettes[ligne+1][1])-1)*cote,y2,remplissage=list_couleur[i])
+            x+= cote
+            x2 += cote
+            colonne += 1
+            i += 1
+        ligne += 1
+        y += cote
+        y2 += cote
+        
 def affichage_billes(largeur, hauteur,couleur):
     """Affcihe les billes"""
     ligne = 0
