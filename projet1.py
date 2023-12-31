@@ -37,5 +37,4 @@ print("i")
 
     
     
-
-    
+#Bug : la fênetre se ferme ps quand on est en jeu
