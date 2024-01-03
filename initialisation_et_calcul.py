@@ -13,7 +13,7 @@ def tirette_aleatoire():
     """
     tirettes = []
     i = 0
-    while i < 7:
+    while i < NB_CASES:
         ligne = []
         trou_min = 0
         trou_max = 0
@@ -201,10 +201,74 @@ def num_tirettes(lst):
 def rempli_tab(dico, lst):
     for elt in range(1, NB_CASES+1):
         num_hori = elt
-        num_verti = elt+7
+        num_verti = elt+NB_CASES
         dico = rempli_hori(dico, tirettes_hori, elt, lst[num_hori][1])
         dico = rempli_verti(dico, tirettes_verti, elt, lst[num_verti][1])
     return dico
+
+def action(tab, dico):
+    """Demande aux jouer quel action il souhaite effectuer, 
+    et le fait.
+
+    Args:
+        tab (dict): tableau du jeu
+        dico (dict): dictionnaire des tirettes
+
+    Returns:
+        tab: tableau du jeu après l'action
+    """
+    cond_tir = False
+    cond_dir = False
+    while not cond_tir:
+        num_tir = int(input("Numéro de tirettes: "))
+        if num_tir <= NB_CASES*2:
+            cond_tir = True
+        else:
+            print("La tirrete n'existe pas")
+    while not cond_dir:
+        direction = str(input("Pousser(D) ou Tirer(G): "))
+        
+        # Si le joueur souhaite tirer la tirette
+        if direction == "G":
+            cond_dir = True
+            
+            #Tirettes verticales
+            if num_tir > NB_CASES:
+                if dico[num_tir][1] == 1:
+                    rempli_verti(tab, tirettes_verti, num_tir-NB_CASES, dico[num_tir][1])
+                else:
+                    nv_depart = dico[num_tir][1] - 1
+                    rempli_verti(tab, tirettes_verti, num_tir-NB_CASES, nv_depart)
+            #Tirettes horizontales
+            else:
+                if dico[num_tir][1] == 1:
+                    rempli_hori(tab, tirettes_hori, num_tir, dico[num_tir][1])
+                else:
+                    nv_depart = dico[num_tir][1] - 1
+                    rempli_hori(tab, tirettes_hori, num_tir, nv_depart)
+
+        #Si le joueur souhaite pousser la tirette
+        elif direction == "D":
+            cond_dir = True
+
+            #Tirettes verticales
+            if num_tir > NB_CASES:
+                if dico[num_tir][1] == 3:
+                    rempli_verti(tab, tirettes_verti, num_tir-NB_CASES, dico[num_tir][1])
+                else:
+                    nv_depart = dico[num_tir][1] + 1
+                    rempli_verti(tab, tirettes_verti, num_tir-NB_CASES, nv_depart)
+            #Tirettes horizontales
+            else:
+                if dico[num_tir][1] == 3:
+                    rempli_hori(tab, tirettes_hori, num_tir, dico[num_tir][1])
+                else:
+                    nv_depart = dico[num_tir][1] + 1
+                    rempli_hori(tab, tirettes_hori, num_tir, nv_depart)
+                
+        else:
+            print("Mouvement impossible")
+        return tab
 
 
 #Tableau du jeu : dico avec tuple (x, y) pour hozi, verti
