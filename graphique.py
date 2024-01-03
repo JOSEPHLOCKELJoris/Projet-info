@@ -32,15 +32,16 @@ def plateau(largeur, hauteur):
     """
     
     lst_couleur=[]
-    for i in range (NB_CASES**2):
-        for elmt in tableau:
-            if (tableau[elmt][0] == False) or ((tableau[elmt][0] == False) and tableau[elmt][1] == False): #plat hori ou (plat hori sur plat verti)
-                lst_couleur.append("green")
-            elif (tableau[elmt][1] == False) and (tableau[elmt][0] == True):#plat verti et pas plat hori
-                lst_couleur.append("blue")   
-            else: #trou (white)
-                lst_couleur.append(None)  
-      
+    print(tableau)
+    for elmt in tableau:
+        if tableau[elmt][0] == 0: #plat horizontal
+            lst_couleur.append("green")
+        elif (tableau[elmt][1] == 0) and (tableau[elmt][0] == 1):#plat verti et pas plat hori
+            lst_couleur.append("blue")
+        else: #trou (white)
+            lst_couleur.append(None)  
+
+    print(lst_couleur)
     """cases centrales"""
     ligne = 0
     colonne = 0
@@ -65,14 +66,20 @@ def plateau(largeur, hauteur):
         ligne += 1
         y += cote
         y2 += cote
+        
+    """carré du jeu"""
     rectangle((largeur/11)*2,(hauteur/11)*2,(largeur / 11)*9,(hauteur/11)*9,epaisseur=4) #cadre du jeu
+    
+    """affichage des numéros des tirettes"""
+    affichage_num(largeur,hauteur)
+   
     mise_a_jour()
     return tableau
 
 def tirettes(largeur, hauteur):
     """Affichage des tirettes et de leurs couleurs"""
 
-    """couleur tirette vericales"""
+    """couleur tirette verticales"""
     list_couleur = []
     for tir in dico_tirettes:
         for elmt in dico_tirettes[tir][0]:
@@ -80,7 +87,7 @@ def tirettes(largeur, hauteur):
                 list_couleur.append("blue")
             else:
                 list_couleur.append(None)
-                
+    
     """tirettes verticales"""
     ligne = 0
     colonne = 0
@@ -115,7 +122,6 @@ def tirettes(largeur, hauteur):
                 list_couleur.append("green")
             else:
                 list_couleur.append(None)
-    
     
     """tirettes horizontales"""
     ligne = 0
@@ -162,7 +168,8 @@ def affichage_billes(largeur, hauteur,couleur):
             for bille in joueur_1:
                 if (joueur_1[bille][0]-1) == colonne: #comparaison abscisse
                     if (joueur_1[bille][1]-1)== ligne: #comparaison ordonnee
-                        cercle(x,y,cote/2,couleur=coul_j1,remplissage=coul_j1) #bille tracé    
+                        cercle(x,y,cote/2,couleur=couleur,remplissage=couleur)
+                        #cercle(x,y,cote/2,couleur=coul_j1,remplissage=coul_j1) #bille tracé    
             x+= cote
             x2 += cote
             colonne += 1
@@ -226,7 +233,6 @@ def menu(largeur, hauteur):
     texte(largeur // 2, 8.5 * hauteur // 10, "QUITTER", ancrage='c',
           couleur="white", taille=largeur // 40, tag="menu")
     boucle_menu(largeur,hauteur)
-    print("y")
     return tableau
 
 def boucle_menu(largeur,hauteur):
@@ -241,7 +247,6 @@ def boucle_menu(largeur,hauteur):
             #touche JOUER
             if (largeur // 3 < abscisse(evv) < 2 * largeur // 3 and
                     4 * hauteur // 10 < ordonnee(evv) < 5 * hauteur // 10):
-                print("x")
                 efface_tout()
                 return tableau
             #touche REGLES
@@ -297,4 +302,6 @@ def action(dico, lst):
     else:
         dico = rempli_hori(dico, tirettes_hori, num_tir, lst[num_tir][1])
     return dico
+
+
 

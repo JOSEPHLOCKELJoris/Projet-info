@@ -15,12 +15,20 @@ def tirette_aleatoire():
     i = 0
     while i < 7:
         ligne = []
+        trou_min = 0
+        trou_max = 0
         for tirette in range(NB_CASES + 2):
             alea = randint(0,1)
             if alea == 0:
                 alea = False
+                trou_max += 1
+                if trou_max == 3:
+                    alea = True
             else:
                 alea = True
+                trou_min += 1
+                if trou_min == 5:
+                    alea = False
             ligne.append(alea)
         tirettes.append(ligne)
         i+=1
@@ -43,6 +51,17 @@ def all_tirettes():
     for elt in tirettes_verticale:
         tirettes_tab.append(elt)
     return tirettes_horizontal, tirettes_verticale, tirettes_tab
+
+
+def conversion_tableau(tableau):
+    tab = []
+    for elem in tableau:
+        if (tableau[elem] == (0,1)) or (tableau[elem] == (0,0)) or (tableau[elem] == (1,0)):
+            tab.append(False)
+        elif tableau[elem] == (1,1):
+            tab.append(True)
+    return tab
+
 
 def possibilites(position_ex):
     if position_ex == 0:
@@ -153,7 +172,7 @@ def statut_case(tableau):
     """
     vl_case = []
     for case in tableau:
-        if tableau[case][0] == 0 and tableau[case][1] == 0:
+        if (tableau[case][0] == 0 or tableau[case][1] == 0):
             val = False
         else:
             val = True
@@ -191,9 +210,7 @@ def rempli_tab(dico, lst):
 #Tableau du jeu : dico avec tuple (x, y) pour hozi, verti
 tableau = cree_grille(NB_CASES)
 
-#Liste de True, False pour indiquer si trou
-#ou pas pour chaque case
-val_cases=statut_case(tableau)
+
 
 #Dico de toutes les tirettes avec leurs indice de début
 dico_tirettes = num_tirettes(lst_tirettes)
@@ -201,11 +218,16 @@ dico_tirettes = num_tirettes(lst_tirettes)
 #Rempli le tableau de tirettes
 tableau = rempli_tab(tableau, dico_tirettes)
 
+#Liste de True, False pour indiquer si trou
+#ou pas pour chaque case
+val_cases=statut_case(tableau)
+
 #Tests:
 
 #print(tirettes_hori)
 #print(tirettes_verti)
 #print(lst_tirettes)
 #print(tableau)
-#print(dico_tirettes)
+print(lst_tirettes)
+print(dico_tirettes)
 #print(val_cases)

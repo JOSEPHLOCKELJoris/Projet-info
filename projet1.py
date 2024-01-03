@@ -23,15 +23,19 @@ menu(LARGEUR, HAUTEUR) #boucle du menu
 
 while jeu:
     tableau = plateau(LARGEUR,HAUTEUR) #bouton JOUER pressé = début de l'installation du jeu
+    tableau = conversion_tableau(tableau)
     
     """choix position bille"""
+    
+    
+    
+    """
     affichage_billes(LARGEUR,HAUTEUR,"pink")
+    affichage_billes(LARGEUR, HAUTEUR,"grey") #affichage billes
     tableau = action(tableau,dico_tirettes)
-    
+    affichage_billes(LARGEUR, HAUTEUR,coul_j1) #affichage billes
     print("i")
-    
-    
-    #affichage_billes(largeur, hauteur,coul_j1) #affichage billes
+    """
     break
 print("i")
 
