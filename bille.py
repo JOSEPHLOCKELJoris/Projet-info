@@ -4,27 +4,50 @@
 #Vérifier si la case n'est pas déjà occupée,
 #besoin du plateau
 
-def pose_billes():
+def pose_billes(tableau):
+    """tableau séparé en ligne"""
+    #statut case
+    tab = []
+    tabl = []
+    i = 0
+    for elem in tableau:
+        tabl.append(tableau[elem])
+        i += 1
+        if i == 7:
+            tab.append(tabl)
+            i = 0
+            tabl = []
+    print(tab)
+
     """
     Demande au joueurs de placer ces billes et stock
     leurs positions dans un dictionnaire.
     """
     #couleur_bille = input("Couleur bille? yellow, grey, pink...")
+    couleur_bille = "yellow"
     dico_billes = {}
-    for joueur in range(5):
+    joueur = 1
+    while joueur != 6:
         """ordonnée de la bille"""
         bille_y = int(input("ligne_bille_" + str(joueur) + " :"))
         while (bille_y < 0) or (bille_y > 7):
             print("Choississez un chiffre entre la ligne 1 et la ligne 7 en partant du haut!!")
             bille_y = int(input("Ligne_bille_" + str(joueur) + " :"))
-        
+            
         """abscisse de la bille"""
         bille_x = int(input("colonne_bille_" + str(joueur) + " :"))
         while (bille_x < 0) or (bille_x > 7):
-            print("Choississez un chiffre entre la ligne 1 et la ligne 7 en partant de la gauche!!")
+            print("Choississez un chiffre entre la colonne 1 et la colonne 7 en partant de la gauche!!")
             bille_x = int(input("Colonne_bille_" + str(joueur) + " :"))
-        dico_billes[joueur + 1] = (bille_x, bille_y,couleur_bille)
-        
+            
+            """condition tableau, bille posable"""
+        print(tab[(bille_y)-1][(bille_x)-1])
+        if tab[(bille_y)-1][(bille_x)-1] == (1,1):
+            print("Trou! Choisissez un autre emplacement")
+        else:
+            dico_billes[joueur] = (bille_x, bille_y,couleur_bille)
+            joueur += 1
+
     return dico_billes
 
 

@@ -52,17 +52,6 @@ def all_tirettes():
         tirettes_tab.append(elt)
     return tirettes_horizontal, tirettes_verticale, tirettes_tab
 
-
-def conversion_tableau(tableau):
-    tab = []
-    for elem in tableau:
-        if (tableau[elem] == (0,1)) or (tableau[elem] == (0,0)) or (tableau[elem] == (1,0)):
-            tab.append(False)
-        elif tableau[elem] == (1,1):
-            tab.append(True)
-    return tab
-
-
 def possibilites(position_ex):
     if position_ex == 0:
         print("Vous pouvez uniquement tirez à gauche. Vous tirez donc à gauche. Action effectuée. ")
@@ -292,6 +281,6 @@ val_cases=statut_case(tableau)
 #print(tirettes_verti)
 #print(lst_tirettes)
 #print(tableau)
-print(lst_tirettes)
-print(dico_tirettes)
+#print(lst_tirettes)
+#print(dico_tirettes)
 #print(val_cases)

@@ -15,6 +15,10 @@ def plateau(largeur, hauteur):
         ancrage='c') #affichage fond ecran
     tirettes(largeur, hauteur) #affichage tirettes en arrière plan
     
+    """carré du jeu"""
+    rectangle((largeur/11)*2,(hauteur/11)*2,(largeur / 11)*9,(hauteur/11)*9,remplissage="grey",epaisseur=4) #cadre du jeu
+    
+    
     """Algo du jeu.
 
     Args:
@@ -31,17 +35,16 @@ def plateau(largeur, hauteur):
             Blanc = La bille est sur 2 plat
     """
     
-    lst_couleur=[]
     print(tableau)
+    lst_couleur=[]
     for elmt in tableau:
         if tableau[elmt][0] == 0: #plat horizontal
             lst_couleur.append("green")
         elif (tableau[elmt][1] == 0) and (tableau[elmt][0] == 1):#plat verti et pas plat hori
             lst_couleur.append("blue")
-        else: #trou (white)
+        else: #trou
             lst_couleur.append(None)  
 
-    print(lst_couleur)
     """cases centrales"""
     ligne = 0
     colonne = 0
@@ -67,9 +70,7 @@ def plateau(largeur, hauteur):
         y += cote
         y2 += cote
         
-    """carré du jeu"""
-    rectangle((largeur/11)*2,(hauteur/11)*2,(largeur / 11)*9,(hauteur/11)*9,epaisseur=4) #cadre du jeu
-    
+
     """affichage des numéros des tirettes"""
     affichage_num(largeur,hauteur)
    
@@ -148,8 +149,8 @@ def tirettes(largeur, hauteur):
         y += cote
         y2 += cote
         
-def affichage_billes(largeur, hauteur,couleur):
-    """Affcihe les billes"""
+def affichage_billes(largeur, hauteur,joueur_1):
+    """Affiche les billes"""
     ligne = 0
     colonne = 0
     nb_ligne = 7
@@ -168,7 +169,7 @@ def affichage_billes(largeur, hauteur,couleur):
             for bille in joueur_1:
                 if (joueur_1[bille][0]-1) == colonne: #comparaison abscisse
                     if (joueur_1[bille][1]-1)== ligne: #comparaison ordonnee
-                        cercle(x,y,cote/2,couleur=couleur,remplissage=couleur)
+                        cercle(x,y,cote/2,couleur=joueur_1[bille][2],remplissage=joueur_1[bille][2])
                         #cercle(x,y,cote/2,couleur=coul_j1,remplissage=coul_j1) #bille tracé    
             x+= cote
             x2 += cote
