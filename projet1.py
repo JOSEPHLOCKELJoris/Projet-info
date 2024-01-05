@@ -8,6 +8,5 @@ from bille import *
 cree_fenetre(LARGEUR,HAUTEUR)
 menu(LARGEUR, HAUTEUR,tableau)
 
-    
-    
+
 #Bug : la fênetre se ferme ps quand on est en jeu

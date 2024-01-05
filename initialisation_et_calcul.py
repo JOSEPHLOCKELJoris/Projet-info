@@ -201,62 +201,62 @@ def action(tab, dico):
     cond_tir = False
     cond_dir = False
     while not cond_tir:
-        num_tir = int(input("Numéro de tirettes: "))
-        if num_tir <= NB_CASES*2:
-            cond_tir = True
+        num_tir = input("Numéro de tirettes: ")
+        if num_tir.isdigit() is True:
+            if int(int(num_tir)) <= NB_CASES*2:
+                cond_tir = True
         else:
             print("La tirette n'existe pas")
     while not cond_dir:
         direction = str(input("Pousser(D) ou Tirer(G): "))
-        
+
         # Si le joueur souhaite tirer la tirette
         if direction == "G":
             cond_dir = True
-            
+
             #Tirettes verticales
-            if num_tir > NB_CASES:
-                if dico[num_tir][1] == 1:
-                    rempli_verti(tab, tirettes_verti, num_tir-NB_CASES, dico[num_tir][1])
+            if int(num_tir) > NB_CASES:
+                if dico[int(num_tir)][1] == 1:
+                    rempli_verti(tab, tirettes_verti, int(num_tir)-NB_CASES, dico[int(num_tir)][1])
                 else:
-                    nv_depart = dico[num_tir][1] - 1
-                    dico[num_tir] = (tirettes_hori[num_tir-NB_CASES-1],nv_depart)
-                    rempli_verti(tab, tirettes_verti, num_tir-NB_CASES, nv_depart)
+                    nv_depart = dico[int(num_tir)][1] - 1
+                    dico[int(num_tir)] = (tirettes_hori[int(num_tir)-NB_CASES-1],nv_depart)
+                    rempli_verti(tab, tirettes_verti, int(num_tir)-NB_CASES, nv_depart)
             #Tirettes horizontales
             else:
-                if dico[num_tir][1] == 1:
-                    rempli_hori(tab, tirettes_hori, num_tir, dico[num_tir][1])
+                if dico[int(num_tir)][1] == 1:
+                    rempli_hori(tab, tirettes_hori, int(num_tir), dico[int(num_tir)][1])
                 else:
-                    nv_depart = dico[num_tir][1] - 1
-                    dico[num_tir] = (tirettes_hori[num_tir-1],nv_depart)
-                    rempli_hori(tab, tirettes_hori, num_tir, nv_depart)
+                    nv_depart = dico[int(num_tir)][1] - 1
+                    dico[int(num_tir)] = (tirettes_hori[int(num_tir)-1],nv_depart)
+                    rempli_hori(tab, tirettes_hori, int(num_tir), nv_depart)
 
         #Si le joueur souhaite pousser la tirette
         elif direction == "D":
             cond_dir = True
 
             #Tirettes verticales
-            if num_tir > NB_CASES:
-                if dico[num_tir][1] == 3:
-                    rempli_verti(tab, tirettes_verti, num_tir-NB_CASES, dico[num_tir][1])
+            if int(int(num_tir)) > NB_CASES:
+                if dico[int(int(num_tir))][1] == 3:
+                    rempli_verti(tab, tirettes_verti, int(num_tir)-NB_CASES,
+                                 dico[int(int(num_tir))][1])
                 else:
-                    nv_depart = dico[num_tir][1] + 1
-                    dico[num_tir] = (tirettes_verti[num_tir-NB_CASES-1],nv_depart)
-                    rempli_verti(tab, tirettes_verti, num_tir-NB_CASES, nv_depart)
+                    nv_depart = dico[int(num_tir)][1] + 1
+                    dico[int(num_tir)] = (tirettes_verti[int(num_tir)-NB_CASES-1],nv_depart)
+                    rempli_verti(tab, tirettes_verti, int(num_tir)-NB_CASES, nv_depart)
             #Tirettes horizontales
             else:
-                if dico[num_tir][1] == 3:
-                    rempli_hori(tab, tirettes_hori, num_tir, dico[num_tir][1])
+                if dico[int(int(num_tir))][1] == 3:
+                    rempli_hori(tab, tirettes_hori, int(num_tir), dico[int(num_tir)][1])
                 else:
-                    nv_depart = dico[num_tir][1] + 1
-                    dico[num_tir] = (tirettes_hori[num_tir-NB_CASES-1],nv_depart)
-                    rempli_hori(tab, tirettes_hori, num_tir, nv_depart)
-                
+                    nv_depart = dico[int(num_tir)][1] + 1
+                    dico[int(int(num_tir))] = (tirettes_hori[int(num_tir)-NB_CASES-1],nv_depart)
+                    rempli_hori(tab, tirettes_hori, int(num_tir), nv_depart)
+
         else:
             print("Mouvement impossible")
         return tab, dico_tirettes
 
-def billes_perdu(joueur_1,tableau):
-    pass
 
 
 
@@ -279,11 +279,3 @@ tableau = rempli_tab(tableau, dico_tirettes)
 #ou pas pour chaque case
 val_cases=statut_case(tableau)
 
-#Tests:
-
-#print(tirettes_hori)
-#print(tirettes_verti)
-#print(lst_tirettes)
-#print(lst_tirettes)
-#print(dico_tirettes)
-#print(val_cases)
