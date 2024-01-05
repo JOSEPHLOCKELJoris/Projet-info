@@ -1,4 +1,5 @@
 """ Fonctions Billes """
+from initialisation_et_calcul import NB_CASES
 
 #Futur amelioration:
 #Vérifier si la case n'est pas déjà occupée,
@@ -50,37 +51,34 @@ def pose_billes(tableau):
     print(dico_billes)
     return dico_billes
 
-#joueur_1={1: (1 ,1, 'yellow'), 2: (1, 2, 'yellow'), 3: (1, 3, 'yellow'),
-#4: (1, 4, 'yellow'), 5: (1, 5, 'yellow')}
-    
-def reinit_bille(joueur_1,tb):
-    """tableau séparé en ligne"""
-    #statut case
-    tab = []
-    tabl = []
-    i = 0
-    for elem in tb:
-        tabl.append(tb[elem])
-        i += 1
-        if i == 7:
-            tab.append(tabl)
-            i = 0
-            tabl = []
-    print(tab,tb)
-    j = {}
-    for bille in joueur_1:
-        if tab[joueur_1[bille][0]-1][joueur_1[bille][1]-1] == (1,1):
-            print("nope")
-        else:
-            print("yes")
-            j[bille]=joueur_1[bille]
-            print(j)
-    return j
-                                       
-#joueur_1 = pose_billes()
-coul_j1 = "pink"
-#joueur_2 = pose_billes()
-#joueur_1 = {1: (1, 2), 2: (2, 4), 3: (3, 6), 4: (6, 4), 5: (1, 5)}
+def verif_bille(dico_tab, dico_joueur):
+    """Vérifie si les billes d'un joueur sont sur un trou, 
+    et les supprimes alors si besoin .
 
-#def verif_bille(pallette, dico):
-#besoin des palettes
+    Args:
+        dico_tab (dict): tableau du jeu
+        dico_joueur (dict): billes du joueur
+
+    Returns:
+        dico_joueur: Dictionnaire des billes qui ne sont
+        pas sur des trou
+        -----------------------------------------------------------
+        joueur_1={1: (1 ,1, 'yellow'), 2: (1, 2, 'yellow'), 3: (1, 3, 'yellow'),
+              4: (1, 4, 'yellow'), 5: (1, 5, 'yellow')}
+        tableau = {0: (1, 1), 1: (1, 1), 2: (1, 0), 3: (0, 1), 4: (1, 0), 5: (0, 1),
+                6: (1, 1), 7: (1, 0)
+        >>> joueur_1 = verif_bille(tableau, joueur_1)
+        >>> print(joueur_1)
+        {2: (1, 2, 'yellow'), 3: (1, 3, 'yellow'),4: (1, 4, 'yellow'),
+        5: (1, 5, 'yellow')}
+    """
+    lst_del = []
+    for elt, val in dico_joueur.items():
+        case = int((val[1]-1)*NB_CASES + (val[0]-1))
+        if (dico_tab[case][0]) == 1 and (dico_tab[case][1] == 1):
+            lst_del.append(elt)
+    for supp in lst_del:
+        del dico_joueur[supp]
+    return dico_joueur
+
+COUL_J1 = "pink"

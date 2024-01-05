@@ -1,12 +1,9 @@
 from random import randint
 from fltk import *
 from initialisation_et_calcul import *
-from graphique import *
-from bille import *
+from graphique_final import *
+from bille_final import *
 
-
-cree_fenetre(LARGEUR,HAUTEUR)
-menu(LARGEUR, HAUTEUR,tableau)
-
+jeu()
 
 #Bug : la fênetre se ferme ps quand on est en jeu
