@@ -219,7 +219,7 @@ def action(tab, dico):
                     rempli_verti(tab, tirettes_verti, num_tir-NB_CASES, dico[num_tir][1])
                 else:
                     nv_depart = dico[num_tir][1] - 1
-                    dico[num_tir] = (tirettes_hori[num_tir-1],nv_depart)
+                    dico[num_tir] = (tirettes_hori[num_tir],nv_depart)
                     rempli_verti(tab, tirettes_verti, num_tir-NB_CASES, nv_depart)
             #Tirettes horizontales
             else:
