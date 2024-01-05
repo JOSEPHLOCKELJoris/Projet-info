@@ -227,6 +227,7 @@ def action(tab, dico):
                     rempli_verti(tab, tirettes_verti, num_tir-NB_CASES, dico[num_tir][1])
                 else:
                     nv_depart = dico[num_tir][1] - 1
+                    dico[num_tir] = (tirettes_hori[num_tir],nv_depart)
                     rempli_verti(tab, tirettes_verti, num_tir-NB_CASES, nv_depart)
             #Tirettes horizontales
             else:
@@ -234,6 +235,7 @@ def action(tab, dico):
                     rempli_hori(tab, tirettes_hori, num_tir, dico[num_tir][1])
                 else:
                     nv_depart = dico[num_tir][1] - 1
+                    dico[num_tir] = (tirettes_hori[num_tir-1],nv_depart)
                     rempli_hori(tab, tirettes_hori, num_tir, nv_depart)
 
         #Si le joueur souhaite pousser la tirette
@@ -246,6 +248,7 @@ def action(tab, dico):
                     rempli_verti(tab, tirettes_verti, num_tir-NB_CASES, dico[num_tir][1])
                 else:
                     nv_depart = dico[num_tir][1] + 1
+                    dico[num_tir] = (tirettes_verti[num_tir],nv_depart)
                     rempli_verti(tab, tirettes_verti, num_tir-NB_CASES, nv_depart)
             #Tirettes horizontales
             else:
@@ -253,11 +256,12 @@ def action(tab, dico):
                     rempli_hori(tab, tirettes_hori, num_tir, dico[num_tir][1])
                 else:
                     nv_depart = dico[num_tir][1] + 1
+                    dico[num_tir] = (tirettes_hori[num_tir-1],nv_depart)
                     rempli_hori(tab, tirettes_hori, num_tir, nv_depart)
                 
         else:
             print("Mouvement impossible")
-        return tab
+        return tab, dico_tirettes
 
 
 #Tableau du jeu : dico avec tuple (x, y) pour hozi, verti
@@ -280,7 +284,6 @@ val_cases=statut_case(tableau)
 #print(tirettes_hori)
 #print(tirettes_verti)
 #print(lst_tirettes)
-#print(tableau)
 #print(lst_tirettes)
 #print(dico_tirettes)
 #print(val_cases)

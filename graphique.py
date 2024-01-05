@@ -2,12 +2,13 @@
 from fltk import *
 from random import *
 from initialisation_et_calcul import (val_cases, NB_CASES, tableau,dico_tirettes,lst_tirettes,
-                                      rempli_verti,rempli_hori,tirettes_verti,tirettes_hori)
+                                      rempli_verti,rempli_hori,tirettes_verti,tirettes_hori,
+                                      rempli_tab, action, cree_grille, num_tirettes)
 from bille import *
 
 #dimension de la fenêtre
-LARGEUR = 800
-HAUTEUR = 800
+LARGEUR = 600
+HAUTEUR = 600
 
 def plateau(largeur, hauteur):
     efface_tout()
@@ -35,7 +36,6 @@ def plateau(largeur, hauteur):
             Blanc = La bille est sur 2 plat
     """
     
-    print(tableau)
     lst_couleur=[]
     for elmt in tableau:
         if tableau[elmt][0] == 0: #plat horizontal
@@ -148,7 +148,7 @@ def tirettes(largeur, hauteur):
         ligne += 1
         y += cote
         y2 += cote
-        
+
 def affichage_billes(largeur, hauteur,joueur_1):
     """Affiche les billes"""
     ligne = 0
@@ -180,7 +180,6 @@ def affichage_billes(largeur, hauteur,joueur_1):
         y2 += cote
     return joueur_1
 
-
 def regles(largeur, hauteur):
     """Algo des règles.
 
@@ -208,7 +207,6 @@ def regles(largeur, hauteur):
                     8*hauteur//10 < ordonnee(evv)< 9*hauteur//10):
                 efface_tout()
                 menu(LARGEUR, HAUTEUR)
-
 
 def menu(largeur, hauteur):
     """
@@ -249,7 +247,7 @@ def boucle_menu(largeur,hauteur):
             if (largeur // 3 < abscisse(evv) < 2 * largeur // 3 and
                     4 * hauteur // 10 < ordonnee(evv) < 5 * hauteur // 10):
                 efface_tout()
-                return tableau
+                boucle_jeu(HAUTEUR, LARGEUR)
             #touche REGLES
             elif (largeur // 3 < abscisse(evv) < 2 * largeur // 3 and
                     6 * hauteur // 10 < ordonnee(evv) < 7 * hauteur // 10):
@@ -291,18 +289,29 @@ def affichage_num(largeur,hauteur):
         x += largeur/11
         i += 1
 
-def action(dico, lst):
-    num_tir = int(input("Numéro de tirettes: "))
-    direction = input("Pousser(d) ou Tirer(g): ")
-    if num_tir > NB_CASES*2:
-        num_tir = int(input("Tirettes introuvable: "))
-    if dico_tirettes != "d" or "g":
-        dico_tirettes = input("Mauvaise syntaxe: ")
-    if num_tir > NB_CASES:
-        dico = rempli_verti(dico, tirettes_verti, num_tir, lst[num_tir][1])
-    else:
-        dico = rempli_hori(dico, tirettes_hori, num_tir, lst[num_tir][1])
-    return dico
+def boucle_jeu(larg, haut):
+    tour = 0
+
+    dico_tirettes = num_tirettes(lst_tirettes)
+    tableau = cree_grille(NB_CASES)
+    tableau = rempli_tab(tableau, dico_tirettes)
+    joueur_1 = pose_billes(tableau)
+    joueur_2 = pose_billes(tableau)
+    jeu = True
+    evv = attend_ev()
+    tev = type_ev(evv)
+    while jeu:
+        if tev == 'Quitte':
+            jeu = False
+        plateau(LARGEUR, HAUTEUR)
+        affichage_billes(LARGEUR, HAUTEUR, joueur_1)
+        affichage_billes(LARGEUR, HAUTEUR, joueur_2)
+        print(tableau)
+        print(dico_tirettes)
+        tableau ,dico_tirettes= action(tableau, dico_tirettes)
+        print(tableau)
+        print(dico_tirettes)
+        plateau(LARGEUR, HAUTEUR)
 
 
 

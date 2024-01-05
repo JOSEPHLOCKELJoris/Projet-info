@@ -17,7 +17,6 @@ def pose_billes(tableau):
             tab.append(tabl)
             i = 0
             tabl = []
-    print(tab)
 
     """
     Demande au joueurs de placer ces billes et stock
@@ -57,7 +56,7 @@ def choix_bille():
 #joueur_1 = pose_billes()
 coul_j1 = "pink"
 #joueur_2 = pose_billes()
-joueur_1 = {1: (1, 2), 2: (2, 4), 3: (3, 6), 4: (6, 4), 5: (1, 5)}
+#joueur_1 = {1: (1, 2), 2: (2, 4), 3: (3, 6), 4: (6, 4), 5: (1, 5)}
 
 
 
