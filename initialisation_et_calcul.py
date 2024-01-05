@@ -187,7 +187,7 @@ def rempli_tab(dico, lst):
         dico = rempli_verti(dico, tirettes_verti, elt, lst[num_verti][1])
     return dico
 
-def act(tab, dico):
+def action(tab, dico):
     """Demande aux jouer quel action il souhaite effectuer, 
     et le fait.
 
@@ -219,7 +219,7 @@ def act(tab, dico):
                     rempli_verti(tab, tirettes_verti, num_tir-NB_CASES, dico[num_tir][1])
                 else:
                     nv_depart = dico[num_tir][1] - 1
-                    dico[num_tir] = (tirettes_hori[num_tir],nv_depart)
+                    dico[num_tir] = (tirettes_hori[num_tir-1],nv_depart)
                     rempli_verti(tab, tirettes_verti, num_tir-NB_CASES, nv_depart)
             #Tirettes horizontales
             else:
