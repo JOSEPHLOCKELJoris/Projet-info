@@ -299,7 +299,7 @@ def boucle_jeu(larg, haut):
     tableau = cree_grille(NB_CASES)
     tableau = rempli_tab(tableau, dico_tirettes)
     #joueur_1 = pose_billes(tableau)
-    joueur_1={1: (2, 4, 'yellow'), 2: (7, 4, 'yellow'), 3: (3, 5, 'yellow'), 4: (2, 4, 'yellow'), 5: (3, 6, 'yellow')}
+    joueur_1={1: (1 ,1, 'yellow'), 2: (1, 2, 'yellow'), 3: (1, 3, 'yellow'), 4: (1, 4, 'yellow'), 5: (1, 5, 'yellow')}
     jeu = True
     evv = attend_ev()
     tev = type_ev(evv)
