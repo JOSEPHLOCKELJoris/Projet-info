@@ -31,9 +31,9 @@ def plateau(largeur, hauteur):
    
     
     """ Choix des couleurs des cases tirettes superposées
-            Rouge = La bille tombe
-            orange = La bille est sur un seul plat
-            Blanc = La bille est sur 2 plat
+            gris = La bille tombe
+            bleu = La bille est sur le plat horizontal (vertical doute?!! :) )
+            vert = La bille est sur le plat vertical
     """
     
     lst_couleur=[]

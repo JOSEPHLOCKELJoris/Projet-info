@@ -28,13 +28,13 @@ def pose_billes(tableau):
     joueur = 1
     while joueur != 6:
         """ordonnée de la bille"""
-        bille_y = int(input("ligne_bille_" + str(joueur) + " :"))
+        bille_y = int(input("Donner la ligne où vous voulez poser la bille " + str(joueur) + " :"))
         while (bille_y < 0) or (bille_y > 7):
             print("Choississez un chiffre entre la ligne 1 et la ligne 7 en partant du haut!!")
             bille_y = int(input("Ligne_bille_" + str(joueur) + " :"))
             
         """abscisse de la bille"""
-        bille_x = int(input("colonne_bille_" + str(joueur) + " :"))
+        bille_x = int(input("cDonner la colonne où vous voulez poser la bille " + str(joueur) + " :"))
         while (bille_x < 0) or (bille_x > 7):
             print("Choississez un chiffre entre la colonne 1 et la colonne 7 en partant de la gauche!!")
             bille_x = int(input("Colonne_bille_" + str(joueur) + " :"))
