@@ -7,8 +7,8 @@ from initialisation_et_calcul import (val_cases, NB_CASES, tableau,dico_tirettes
 from bille import *
 
 #dimension de la fenêtre
-LARGEUR = 600
-HAUTEUR = 600
+LARGEUR = 800
+HAUTEUR = 800
 
 def plateau(largeur, hauteur,tab):
     efface_tout()
@@ -17,8 +17,9 @@ def plateau(largeur, hauteur,tab):
     tirettes(largeur, hauteur) #affichage tirettes en arrière plan
     
     """carré du jeu"""
-    rectangle((largeur/11)*2,(hauteur/11)*2,(largeur / 11)*9,(hauteur/11)*9,remplissage="grey",epaisseur=4) #cadre du jeu
-    
+    #rectangle((largeur/11)*2,(hauteur/11)*2,(largeur / 11)*9,(hauteur/11)*9,remplissage="grey",epaisseur=4) #cadre du jeu
+    rectangle((largeur/11)*2,(hauteur/11)*2,(largeur / 11)*9,(hauteur/11)*9,remplissage=None,epaisseur=4) #cadre du jeu
+        
     
     """Algo du jeu.
 
@@ -75,7 +76,7 @@ def plateau(largeur, hauteur,tab):
     affichage_num(largeur,hauteur)
    
     mise_a_jour()
-    return tableau
+    return tab
 
 def tirettes(largeur, hauteur):
     """Affichage des tirettes et de leurs couleurs"""
@@ -105,6 +106,10 @@ def tirettes(largeur, hauteur):
         x = 0
         x2 = x + cote
         while colonne != nb_colonne: #fais toute une ligne
+            if 2*cote<(x+((dico_tirettes[ligne+1][1])-1)*cote)<9*cote:
+                rectangle(x+((dico_tirettes[ligne+1][1])-1)*cote,y,x2+((dico_tirettes[ligne+1][1])-1)*cote,y2)
+            else:
+                rectangle(x+((dico_tirettes[ligne+1][1])-1)*cote,y,x2+((dico_tirettes[ligne+1][1])-1)*cote,y2,remplissage=list_couleur[i])
             rectangle(y,x+((dico_tirettes[ligne+8][1])-1)*cote,y2,x2+((dico_tirettes[ligne+8][1])-1)*cote,remplissage=list_couleur[i+63])
             x+= cote
             x2 += cote
@@ -140,7 +145,11 @@ def tirettes(largeur, hauteur):
         x = 0
         x2 = x + cote
         while colonne != nb_colonne: #fais toute une ligne
-            rectangle(x+((dico_tirettes[ligne+1][1])-1)*cote,y,x2+((dico_tirettes[ligne+1][1])-1)*cote,y2,remplissage=list_couleur[i])
+            if 2*cote<(x+((dico_tirettes[ligne+1][1])-1)*cote)<9*cote:
+                rectangle(x+((dico_tirettes[ligne+1][1])-1)*cote,y,x2+((dico_tirettes[ligne+1][1])-1)*cote,y2)
+            else:
+                rectangle(x+((dico_tirettes[ligne+1][1])-1)*cote,y,x2+((dico_tirettes[ligne+1][1])-1)*cote,y2,remplissage=list_couleur[i])
+            
             x+= cote
             x2 += cote
             colonne += 1
@@ -148,6 +157,7 @@ def tirettes(largeur, hauteur):
         ligne += 1
         y += cote
         y2 += cote
+    mise_a_jour()
 
 def affichage_billes_1(largeur, hauteur,joueur_1):
     """Affiche les billes"""
@@ -161,7 +171,6 @@ def affichage_billes_1(largeur, hauteur,joueur_1):
     x2 = x
     y2 = (hauteur/22)*3
     i = 0
-    print("i",joueur_1)
     while ligne != nb_ligne: #passe à la ligne suivante
         colonne = 0
         x = (largeur/22)*5
@@ -172,7 +181,6 @@ def affichage_billes_1(largeur, hauteur,joueur_1):
                     if (joueur_1[bille][1]-1)== ligne: #comparaison ordonnee
                         cercle(x,y,cote/2,couleur=joueur_1[bille][2],remplissage=joueur_1[bille][2])
                         #cercle(x,y,cote/2,couleur=coul_j1,remplissage=coul_j1) #bille tracé
-                        print("i")
             x+= cote
             x2 += cote
             colonne += 1
@@ -311,21 +319,22 @@ def boucle_jeu():
     dico_tirettes = num_tirettes(lst_tirettes)
     tableau = cree_grille(NB_CASES)
     tableau = rempli_tab(tableau, dico_tirettes)
-    #joueur_1 = pose_billes(tableau)
-    joueur_1={1: (1 ,1, 'yellow'), 2: (1, 2, 'yellow'), 3: (1, 3, 'yellow'),
-              4: (1, 4, 'yellow'), 5: (1, 5, 'yellow')}
+    joueur_1 = pose_billes(tableau)
     jeu = True
     evv = attend_ev()
     tev = type_ev(evv)
     while jeu:
         if tev == 'Quitte':
             jeu = False
-        plateau(LARGEUR, HAUTEUR,tableau)
+        table = plateau(LARGEUR, HAUTEUR,tableau)
         affichage_billes_1(LARGEUR, HAUTEUR, joueur_1)
         print(tableau)
-        print(dico_tirettes)
-        tabl ,dico_tirettes= action(tableau, dico_tirettes)
+        tabl ,dico_tir= action(table, dico_tirettes)
+        joueur_1 = reinit_bille(joueur_1,tableau)
+        dico_tirettes = dico_tir
         tableau = tabl
-        print(tableau)
-        print(dico_tirettes)
-        plateau(LARGEUR, HAUTEUR,tableau)
+        if joueur_1 == {}:
+            jeu = False
+    print("Fin du jeu")
+        
+        

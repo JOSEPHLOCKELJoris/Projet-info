@@ -51,16 +51,38 @@ def pose_billes(tableau):
     return dico_billes
 
 
-def choix_bille():
-    pass
 
+#joueur_1={1: (1 ,1, 'yellow'), 2: (1, 2, 'yellow'), 3: (1, 3, 'yellow'),
+#4: (1, 4, 'yellow'), 5: (1, 5, 'yellow')}
+    
+def reinit_bille(joueur_1,tb):
+    """tableau séparé en ligne"""
+    #statut case
+    tab = []
+    tabl = []
+    i = 0
+    for elem in tb:
+        tabl.append(tb[elem])
+        i += 1
+        if i == 7:
+            tab.append(tabl)
+            i = 0
+            tabl = []
+    print(tab,tb)
+    j = {}
+    for bille in joueur_1:
+        if tab[joueur_1[bille][0]-1][joueur_1[bille][1]-1] == (1,1):
+            print("nope")
+        else:
+            print("yes")
+            j[bille]=joueur_1[bille]
+            print(j)
+    return j
+                                       
 #joueur_1 = pose_billes()
 coul_j1 = "pink"
 #joueur_2 = pose_billes()
 #joueur_1 = {1: (1, 2), 2: (2, 4), 3: (3, 6), 4: (6, 4), 5: (1, 5)}
-
-
-
 
 #def verif_bille(pallette, dico):
 #besoin des palettes
