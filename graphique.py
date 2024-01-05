@@ -10,7 +10,7 @@ from bille import *
 LARGEUR = 600
 HAUTEUR = 600
 
-def plateau(largeur, hauteur):
+def plateau(largeur, hauteur,tab):
     efface_tout()
     image(largeur // 2, hauteur // 2, "img/fond_ecran.jpg", largeur=2 * largeur, hauteur=2 * hauteur,
         ancrage='c') #affichage fond ecran
@@ -37,10 +37,10 @@ def plateau(largeur, hauteur):
     """
     
     lst_couleur=[]
-    for elmt in tableau:
-        if tableau[elmt][0] == 0: #plat horizontal
+    for elmt in tab:
+        if tab[elmt][0] == 0: #plat horizontal
             lst_couleur.append("green")
-        elif (tableau[elmt][1] == 0) and (tableau[elmt][0] == 1):#plat verti et pas plat hori
+        elif (tab[elmt][1] == 0) and (tab[elmt][0] == 1):#plat verti et pas plat hori
             lst_couleur.append("blue")
         else: #trou
             lst_couleur.append(None)  
@@ -149,7 +149,7 @@ def tirettes(largeur, hauteur):
         y += cote
         y2 += cote
 
-def affichage_billes(largeur, hauteur,joueur_1):
+def affichage_billes_1(largeur, hauteur,joueur_1):
     """Affiche les billes"""
     ligne = 0
     colonne = 0
@@ -161,6 +161,7 @@ def affichage_billes(largeur, hauteur,joueur_1):
     x2 = x
     y2 = (hauteur/22)*3
     i = 0
+    print("i",joueur_1)
     while ligne != nb_ligne: #passe à la ligne suivante
         colonne = 0
         x = (largeur/22)*5
@@ -170,7 +171,8 @@ def affichage_billes(largeur, hauteur,joueur_1):
                 if (joueur_1[bille][0]-1) == colonne: #comparaison abscisse
                     if (joueur_1[bille][1]-1)== ligne: #comparaison ordonnee
                         cercle(x,y,cote/2,couleur=joueur_1[bille][2],remplissage=joueur_1[bille][2])
-                        #cercle(x,y,cote/2,couleur=coul_j1,remplissage=coul_j1) #bille tracé    
+                        #cercle(x,y,cote/2,couleur=coul_j1,remplissage=coul_j1) #bille tracé
+                        print("i")
             x+= cote
             x2 += cote
             colonne += 1
@@ -178,6 +180,7 @@ def affichage_billes(largeur, hauteur,joueur_1):
         ligne += 1
         y += cote
         y2 += cote
+    mise_a_jour()
     return joueur_1
 
 def regles(largeur, hauteur):
@@ -208,7 +211,7 @@ def regles(largeur, hauteur):
                 efface_tout()
                 menu(LARGEUR, HAUTEUR)
 
-def menu(largeur, hauteur):
+def menu(largeur, hauteur,tableau):
     """
     Menu principale du jeu
     """
@@ -295,23 +298,23 @@ def boucle_jeu(larg, haut):
     dico_tirettes = num_tirettes(lst_tirettes)
     tableau = cree_grille(NB_CASES)
     tableau = rempli_tab(tableau, dico_tirettes)
-    joueur_1 = pose_billes(tableau)
-    joueur_2 = pose_billes(tableau)
+    #joueur_1 = pose_billes(tableau)
+    joueur_1={1: (2, 4, 'yellow'), 2: (7, 4, 'yellow'), 3: (3, 5, 'yellow'), 4: (2, 4, 'yellow'), 5: (3, 6, 'yellow')}
     jeu = True
     evv = attend_ev()
     tev = type_ev(evv)
     while jeu:
         if tev == 'Quitte':
             jeu = False
-        plateau(LARGEUR, HAUTEUR)
-        affichage_billes(LARGEUR, HAUTEUR, joueur_1)
-        affichage_billes(LARGEUR, HAUTEUR, joueur_2)
+        plateau(LARGEUR, HAUTEUR,tableau)
+        affichage_billes_1(LARGEUR, HAUTEUR, joueur_1)
         print(tableau)
         print(dico_tirettes)
-        tableau ,dico_tirettes= action(tableau, dico_tirettes)
+        tabl ,dico_tirettes= action(tableau, dico_tirettes)
+        tableau = tabl
         print(tableau)
         print(dico_tirettes)
-        plateau(LARGEUR, HAUTEUR)
+        plateau(LARGEUR, HAUTEUR,tableau)
 
 
 

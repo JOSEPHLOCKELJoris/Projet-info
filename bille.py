@@ -34,7 +34,7 @@ def pose_billes(tableau):
             bille_y = int(input("Ligne_bille_" + str(joueur) + " :"))
             
         """abscisse de la bille"""
-        bille_x = int(input("cDonner la colonne où vous voulez poser la bille " + str(joueur) + " :"))
+        bille_x = int(input("Donner la colonne où vous voulez poser la bille " + str(joueur) + " :"))
         while (bille_x < 0) or (bille_x > 7):
             print("Choississez un chiffre entre la colonne 1 et la colonne 7 en partant de la gauche!!")
             bille_x = int(input("Colonne_bille_" + str(joueur) + " :"))
@@ -46,7 +46,8 @@ def pose_billes(tableau):
         else:
             dico_billes[joueur] = (bille_x, bille_y,couleur_bille)
             joueur += 1
-
+    
+    print(dico_billes)
     return dico_billes
 
 

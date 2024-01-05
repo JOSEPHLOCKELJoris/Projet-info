@@ -6,7 +6,7 @@ from bille import *
 
 
 cree_fenetre(LARGEUR,HAUTEUR)
-menu(LARGEUR, HAUTEUR)
+menu(LARGEUR, HAUTEUR,tableau)
 
     
     
