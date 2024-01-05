@@ -52,34 +52,6 @@ def all_tirettes():
         tirettes_tab.append(elt)
     return tirettes_horizontal, tirettes_verticale, tirettes_tab
 
-def possibilites(position_ex):
-    if position_ex == 0:
-        print("Vous pouvez uniquement tirez à gauche. Vous tirez donc à gauche. Action effectuée. ")
-        return 1
-    elif position_ex == 1:
-        print("Vous pouvez tirez à droite ou à gauche. ")
-        choix = input("Tapez d pout tirez à droite, g à gauche")
-        if choix == "d":
-            print("Vous tirez à droite. Action effectuée. ")
-            return 0
-        elif choix == "g":
-            print("Vous tirez à gauche. Action effectuée. ")
-            return 2
-    elif position_ex == 2:
-        print("Vous pouvez uniquemennt tirez à droite. Vous tirez donc à droite. Action effectuée. ")
-        return 1
-    
-def choix_tirettes(posi_hor,posi_vert):
-    print("Il existe 2 types de tirettes: les verticales et les horizontales. ")
-    sens = input("Quelles type de tirettes voulez-vous bouger? Tapez 'v' ou 'h'. ")
-    print("Le rang se fait de haut en bas et de droite à gauche. ")
-    rang = int(input("Quelles tirettes choississez vous? Tapez un chiffre de 0 à 6 puis sur la touche entrez. "))
-    if sens == 'h':
-        posi_hor[0][rang] = possibilites(posi_hor[0][rang])
-    elif sens == 'v':
-        posi_vert[0][rang] = possibilites(posi_vert[0][rang])
-    return posi_hor, posi_vert
-
 def cree_grille(nb_cases):
     """Crée une grille sous forme de dictionnaire qui 
     servira de plateau de jeu.
@@ -106,7 +78,7 @@ def rempli_hori(dico, lst, ligne, debut):
         dict: grille modifiée
     """
     for elt in range((debut-1), ((debut-1)+ NB_CASES)):
-        if lst[ligne-1][elt] == True:
+        if lst[ligne-1][elt] is True:
             val = list(dico[NB_CASES*(ligne-1) + (elt-(debut-1))])
             val[0] = 1
             dico[NB_CASES*(ligne-1) + (elt-(debut-1))] = tuple(val)
@@ -130,7 +102,7 @@ def rempli_verti(dico, lst, colonne, debut):
         dict: grille modifiée
     """
     for elt in range(NB_CASES):
-        if lst[colonne-1][elt + (debut-1)] == True:
+        if lst[colonne-1][elt + (debut-1)] is True:
             val = list(dico[(colonne-1) + NB_CASES*elt])
             val[1] = 1
             dico[(colonne-1) + NB_CASES*elt] = tuple(val)
@@ -171,7 +143,6 @@ def num_tirettes(lst):
         dico: contient le nom, les valeurs sous liste et 
         l'indice de chaque tirettes
     """
-    lst_tirettes = []
     dico = {}
     for elt in range(NB_CASES*2):
         debut = randint(1,3)
@@ -180,6 +151,14 @@ def num_tirettes(lst):
     return dico
 
 def rempli_tab(dico, lst):
+    """Rempli de tableau de tirettes verticales et horizontales
+
+    Args:
+        dico (dict): tableau
+
+    Returns:
+        _type_: _description_
+    """
     for elt in range(1, NB_CASES+1):
         num_hori = elt
         num_verti = elt+NB_CASES
@@ -258,16 +237,12 @@ def action(tab, dico):
         return tab, dico_tirettes
 
 
-
-
 #Initialisation:
 #[tirettes_horizontales], [tirettes_verticales], [liste de toutes les tirettes]
 tirettes_hori, tirettes_verti, lst_tirettes = all_tirettes()
 
 #Tableau du jeu : dico avec tuple (x, y) pour hozi, verti
 tableau = cree_grille(NB_CASES)
-
-
 
 #Dico de toutes les tirettes avec leurs indice de début
 dico_tirettes = num_tirettes(lst_tirettes)
@@ -278,4 +253,3 @@ tableau = rempli_tab(tableau, dico_tirettes)
 #Liste de True, False pour indiquer si trou
 #ou pas pour chaque case
 val_cases=statut_case(tableau)
-
