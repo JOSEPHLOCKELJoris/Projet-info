@@ -175,8 +175,6 @@ def affichage_billes_1(largeur, hauteur,joueur_1):
                 if (joueur_1[bille][0]-1) == colonne: #comparaison abscisse
                     if (joueur_1[bille][1]-1)== ligne: #comparaison ordonnee
                         cercle(x,y,cote/2,couleur=joueur_1[bille][2],remplissage=joueur_1[bille][2])
-                        #cercle(x,y,cote/2,couleur=coul_j1,remplissage=coul_j1) #bille tracé
-                        print("i")
             x+= cote
             x2 += cote
             colonne += 1
@@ -253,7 +251,6 @@ def boucle_menu(largeur,hauteur):
     while cond_menu:
         evv = attend_ev()
         tev = type_ev(evv)
-        print(tev)
         if tev == 'Quitte':
             break
         if tev == "ClicGauche":
@@ -337,11 +334,8 @@ def boucle_jeu():
             jeu = False
         plateau(LARGEUR, HAUTEUR,tableau)
         affichage_billes_1(LARGEUR, HAUTEUR, joueur_1)
-        print(tableau)
-        print(dico_tirettes)
         tabl ,dico_tirettes= action(tableau, dico_tirettes)
         tableau = tabl
-        print(tableau)
         joueur_1 = verif_bille(tableau, joueur_1)
         plateau(LARGEUR, HAUTEUR,tableau)
         if defaite(joueur_1) is True:

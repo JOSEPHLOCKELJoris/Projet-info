@@ -40,15 +40,13 @@ def pose_billes(tableau):
             print("Choississez un chiffre entre la colonne 1 et la colonne 7 en partant de la gauche!!")
             bille_x = int(input("Colonne_bille_" + str(joueur) + " :"))
 
-            #condition tableau, bille posable
-        print(tab[(bille_y)-1][(bille_x)-1])
+        #condition tableau, bille posable
         if tab[(bille_y)-1][(bille_x)-1] == (1,1):
             print("Trou! Choisissez un autre emplacement")
         else:
             dico_billes[joueur] = (bille_x, bille_y,couleur_bille)
             joueur += 1
 
-    print(dico_billes)
     return dico_billes
 
 def verif_bille(dico_tab, dico_joueur):
