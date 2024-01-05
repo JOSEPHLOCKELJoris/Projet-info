@@ -30,12 +30,11 @@ def plateau(largeur, hauteur):
    
     
     """ Choix des couleurs des cases tirettes superposées
-            Rouge = La bille tombe
-            orange = La bille est sur un seul plat
-            Blanc = La bille est sur 2 plat
+            gris = La bille tombe
+            bleu = La bille est sur le plat horizontal (vertical doute?!! :) )
+            vert = La bille est sur le plat vertical
     """
     
-    print(tableau)
     lst_couleur=[]
     for elmt in tableau:
         if tableau[elmt][0] == 0: #plat horizontal
@@ -296,7 +295,7 @@ def action(dico, lst):
     direction = input("Pousser(d) ou Tirer(g): ")
     if num_tir > NB_CASES*2:
         num_tir = int(input("Tirettes introuvable: "))
-    if dico_tirettes != "d" or "g":
+    if direction != "d" or "g":
         dico_tirettes = input("Mauvaise syntaxe: ")
     if num_tir > NB_CASES:
         dico = rempli_verti(dico, tirettes_verti, num_tir, lst[num_tir][1])

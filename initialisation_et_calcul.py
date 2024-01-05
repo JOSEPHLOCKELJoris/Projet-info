@@ -80,14 +80,6 @@ def choix_tirettes(posi_hor,posi_vert):
         posi_vert[0][rang] = possibilites(posi_vert[0][rang])
     return posi_hor, posi_vert
 
-def reinitialisation(tir_hori,tir_verti,pos_hori,pos_verti):
-    """à faire avec tableau"""
-    pass
-
-#Initialisation:
-#[tirettes_horizontales], [tirettes_verticales], [liste de toutes les tirettes]
-tirettes_hori, tirettes_verti, lst_tirettes = all_tirettes()
-
 def cree_grille(nb_cases):
     """Crée une grille sous forme de dictionnaire qui 
     servira de plateau de jeu.
@@ -195,7 +187,7 @@ def rempli_tab(dico, lst):
         dico = rempli_verti(dico, tirettes_verti, elt, lst[num_verti][1])
     return dico
 
-def action(tab, dico):
+def act(tab, dico):
     """Demande aux jouer quel action il souhaite effectuer, 
     et le fait.
 
@@ -213,7 +205,7 @@ def action(tab, dico):
         if num_tir <= NB_CASES*2:
             cond_tir = True
         else:
-            print("La tirrete n'existe pas")
+            print("La tirette n'existe pas")
     while not cond_dir:
         direction = str(input("Pousser(D) ou Tirer(G): "))
         
@@ -259,6 +251,14 @@ def action(tab, dico):
             print("Mouvement impossible")
         return tab
 
+def billes_perdu(joueur_1,tableau):
+    pass
+
+
+
+#Initialisation:
+#[tirettes_horizontales], [tirettes_verticales], [liste de toutes les tirettes]
+tirettes_hori, tirettes_verti, lst_tirettes = all_tirettes()
 
 #Tableau du jeu : dico avec tuple (x, y) pour hozi, verti
 tableau = cree_grille(NB_CASES)

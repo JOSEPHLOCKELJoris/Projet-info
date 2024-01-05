@@ -11,24 +11,19 @@ HAUTEUR = 800
 
 jeu = True
 
-"""
-joueur_1 = pose_bille()
-joueur_2 = pose_bille()
-joueur_3 = pose_bille()
-joueur_4 = pose_bille()
-"""
-
 cree_fenetre(LARGEUR,HAUTEUR)
 menu(LARGEUR, HAUTEUR) #boucle du menu
 
 while jeu:
     tableau = plateau(LARGEUR,HAUTEUR) #bouton JOUER pressé = début de l'installation du jeu
-    
+    print(tableau)
     """Config bille"""
-    joueur_1 = pose_billes(tableau)
-    #joueur_1 = {1: (1, 1, 'yellow'), 2: (2, 1, 'yellow'), 3: (3, 1, 'yellow'), 4: (4, 1, 'yellow'), 5: (7, 1, 'yellow')}
+    #joueur_1 = pose_billes(tableau)
+    joueur_1 = {1: (1, 1, 'yellow'), 2: (2, 1, 'yellow'), 3: (3, 1, 'yellow'), 4: (4, 1, 'yellow'), 5: (7, 1, 'yellow')}
     affichage_billes(LARGEUR,HAUTEUR,joueur_1)
-
+    """def action à mettre, je pourrais ajouter la fonction 'billes perdus' juste après"""
+    print(action(tableau,dico_tirettes))
+    
     break
 print("i")
 
