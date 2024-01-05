@@ -1,5 +1,5 @@
 """ Fonctions Billes """
-from initialisation_et_calcul import NB_CASES
+from initialisation_et_calcul_JOSEPH_ELMERA_CEAVDARI import NB_CASES
 
 #Futur amelioration:
 #Vérifier si la case n'est pas déjà occupée,

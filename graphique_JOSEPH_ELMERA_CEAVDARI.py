@@ -1,10 +1,10 @@
 """ Module """
 from fltk import *
 from random import *
-from initialisation_et_calcul import (val_cases, NB_CASES, tableau,dico_tirettes,lst_tirettes,
+from initialisation_et_calcul_JOSEPH_ELMERA_CEAVDARI import (val_cases, NB_CASES, tableau,dico_tirettes,lst_tirettes,
                                       rempli_verti,rempli_hori,tirettes_verti,tirettes_hori,
                                       rempli_tab, action, cree_grille, num_tirettes)
-from bille_final import *
+from bille_JOSEPH_ELMERA_CEAVDARI import *
 
 #dimension de la fenêtre
 LARGEUR = 600
