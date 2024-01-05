@@ -327,8 +327,8 @@ def boucle_jeu():
     dico_tirettes = num_tirettes(lst_tirettes)
     tableau = cree_grille(NB_CASES)
     tableau = rempli_tab(tableau, dico_tirettes)
-    #joueur_1 = pose_billes(tableau)
-    joueur_1={1: (1 ,1, 'yellow')}
+    joueur_1 = pose_billes(tableau)
+    #joueur_1={1: (1 ,1, 'yellow')}
     jeu = True
     evv = attend_ev()
     tev = type_ev(evv)
