@@ -11,8 +11,10 @@ LARGEUR = 800
 HAUTEUR = 800
 
 def plateau(largeur, hauteur,tab):
+    """Affiche le plateau du jeu """
     efface_tout()
-    image(largeur // 2, hauteur // 2, "img/fond_ecran.jpg", largeur=2 * largeur, hauteur=2 * hauteur,
+    image(largeur // 2, hauteur // 2, "img/fond_ecran.jpg",
+          largeur=2 * largeur, hauteur=2 * hauteur,
         ancrage='c') #affichage fond ecran
     tirettes(largeur, hauteur) #affichage tirettes en arrière plan
     
@@ -21,22 +23,17 @@ def plateau(largeur, hauteur,tab):
     rectangle((largeur/11)*2,(hauteur/11)*2,(largeur / 11)*9,(hauteur/11)*9,remplissage=None,epaisseur=4) #cadre du jeu
         
     
-    """Algo du jeu.
+    """Algo du jeu"""
+    #carré du jeu
+    rectangle((largeur/11)*2,(hauteur/11)*2,(largeur / 11)*9,(hauteur/11)*9,
+              remplissage="grey",epaisseur=4) #cadre du jeu
 
-    Args:
-        hauteur (int): hauteur de la fenêtre
-        largeur (int): largeur de la fenêtre
-    """
-    #rectangle(3*largeur//13, 3*hauteur//13, 10*largeur//13, 10*hauteur//13)
-
-   
-    
     """ Choix des couleurs des cases tirettes superposées
             gris = La bille tombe
-            bleu = La bille est sur le plat horizontal (vertical doute?!! :) )
+            bleu = La bille est sur le plat horizontal
             vert = La bille est sur le plat vertical
     """
-    
+
     lst_couleur=[]
     for elmt in tab:
         if tab[elmt][0] == 0: #plat horizontal
@@ -46,7 +43,7 @@ def plateau(largeur, hauteur,tab):
         else: #trou
             lst_couleur.append(None)  
 
-    """cases centrales"""
+    #cases centrales
     ligne = 0
     colonne = 0
     nb_ligne = 7
@@ -70,11 +67,11 @@ def plateau(largeur, hauteur,tab):
         ligne += 1
         y += cote
         y2 += cote
-        
 
-    """affichage des numéros des tirettes"""
+
+    #affichage des numéros des tirettes
     affichage_num(largeur,hauteur)
-   
+
     mise_a_jour()
     return tab
 
@@ -89,8 +86,8 @@ def tirettes(largeur, hauteur):
                 list_couleur.append("blue")
             else:
                 list_couleur.append(None)
-    
-    """tirettes verticales"""
+
+    #tirettes verticales
     ligne = 0
     colonne = 0
     nb_ligne = 7
@@ -106,6 +103,7 @@ def tirettes(largeur, hauteur):
         x = 0
         x2 = x + cote
         while colonne != nb_colonne: #fais toute une ligne
+            
             if 2*cote<(x+((dico_tirettes[ligne+1][1])-1)*cote)<9*cote:
                 rectangle(x+((dico_tirettes[ligne+1][1])-1)*cote,y,x2+((dico_tirettes[ligne+1][1])-1)*cote,y2)
             else:
@@ -119,8 +117,7 @@ def tirettes(largeur, hauteur):
         y += cote
         y2 += cote
 
-    
-    """couleur tirette horizontales"""
+    #couleur tirette horizontales
     list_couleur = []
     for tir in dico_tirettes:
         for elmt in dico_tirettes[tir][0]:
@@ -128,8 +125,8 @@ def tirettes(largeur, hauteur):
                 list_couleur.append("green")
             else:
                 list_couleur.append(None)
-    
-    """tirettes horizontales"""
+
+    #tirettes horizontales
     ligne = 0
     colonne = 0
     nb_ligne = 7
@@ -149,7 +146,6 @@ def tirettes(largeur, hauteur):
                 rectangle(x+((dico_tirettes[ligne+1][1])-1)*cote,y,x2+((dico_tirettes[ligne+1][1])-1)*cote,y2)
             else:
                 rectangle(x+((dico_tirettes[ligne+1][1])-1)*cote,y,x2+((dico_tirettes[ligne+1][1])-1)*cote,y2,remplissage=list_couleur[i])
-            
             x+= cote
             x2 += cote
             colonne += 1
